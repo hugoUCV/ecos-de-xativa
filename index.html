@@ -3373,6 +3373,129 @@
 
 
     /* ============================================================
+       SECTION: COLOR SCRIPT
+    ============================================================ */
+    #color-script {
+      background: #080706;
+      overflow: hidden;
+    }
+    .cs-intro {
+      max-width: 660px; margin: 0 auto; text-align: center;
+      color: var(--text-m); font-size: 0.95rem; line-height: 1.75;
+      margin-bottom: 72px;
+    }
+    .cs-flow {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .cs-act {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 160px;
+      position: relative;
+      border-bottom: 1px solid rgba(201,168,76,0.10);
+      transition: background 0.4s var(--ease);
+    }
+    .cs-act:last-child { border-bottom: none; }
+    .cs-act-thumb {
+      position: relative; overflow: hidden;
+    }
+    .cs-act-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.6) brightness(0.75);
+      transition: filter 0.5s var(--ease);
+    }
+    .cs-act:hover .cs-act-thumb img {
+      filter: saturate(1) brightness(0.9);
+    }
+    .cs-act-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, #080706 100%);
+    }
+    .cs-act-body {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 28px 36px 28px 28px;
+      gap: 16px;
+    }
+    .cs-act-meta {
+      display: flex; align-items: baseline; gap: 14px;
+    }
+    .cs-act-num {
+      font-family: var(--font-d); font-size: 0.58rem; font-weight: 300;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7;
+    }
+    .cs-act-title {
+      font-family: var(--font-d); font-size: 1.15rem; font-weight: 400;
+      color: var(--text-h); letter-spacing: 0.04em;
+    }
+    .cs-act-mood {
+      font-family: var(--font-b); font-size: 0.62rem; font-weight: 300;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-m); opacity: 0.75;
+    }
+    .cs-swatches {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      align-items: center;
+    }
+    .cs-sw {
+      width: 36px; height: 36px;
+      border-radius: 3px;
+      position: relative;
+      flex-shrink: 0;
+      cursor: default;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .cs-sw:hover {
+      transform: scale(1.25) translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      z-index: 2;
+    }
+    .cs-sw::after {
+      content: attr(data-hex);
+      position: absolute; bottom: calc(100% + 7px); left: 50%;
+      transform: translateX(-50%) scale(0.85);
+      background: rgba(10,8,6,0.95); color: var(--text-h);
+      font-family: var(--font-b); font-size: 0.57rem; font-weight: 400;
+      letter-spacing: 0.08em; white-space: nowrap;
+      padding: 4px 8px; border-radius: 3px;
+      border: 1px solid rgba(201,168,76,0.25);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .cs-sw:hover::after {
+      opacity: 1; transform: translateX(-50%) scale(1);
+    }
+    /* Dominant swatch — slightly larger */
+    .cs-sw.cs-sw--dom {
+      width: 48px; height: 48px; border-radius: 4px;
+    }
+    /* Band of color at top of each act */
+    .cs-band {
+      height: 4px;
+      display: flex;
+      position: absolute; top: 0; left: 0; right: 0;
+    }
+    .cs-band-seg {
+      flex: 1; height: 100%;
+    }
+    @media (max-width: 680px) {
+      .cs-act {
+        grid-template-columns: 1fr;
+      }
+      .cs-act-thumb {
+        height: 120px;
+      }
+      .cs-act-thumb::after {
+        background: linear-gradient(to bottom, transparent 40%, #080706 100%);
+      }
+      .cs-act-body { padding: 20px 20px 24px; }
+    }
+
+    /* ============================================================
        SECTION: CAPTURAS EN JUEGO
     ============================================================ */
     .capturas-tabs {
@@ -3592,6 +3715,7 @@
         <li><a href="#capturas"       class="nav-link">Capturas</a></li>
         <li><a href="#galeria-3d"     class="nav-link">3D</a></li>
         <li><a href="#wireframes"     class="nav-link">Wireframes</a></li>
+        <li><a href="#color-script"   class="nav-link">Color Script</a></li>
         <li><a href="#isometrico"     class="nav-link">Modular</a></li>
         <li><a href="#numeros"        class="nav-link">Cifras</a></li>
         <li><a href="#el-camino"      class="nav-link">Desarrollo</a></li>
@@ -5333,6 +5457,180 @@
         </p>
 
       </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8C — COLOR SCRIPT
+    ============================================================ -->
+    <section id="color-script" aria-labelledby="cs-heading">
+      <div class="container">
+
+        <div class="reveal" style="text-align:center">
+          <span class="section-label">08C — Diseño de color</span>
+          <h2 id="cs-heading" class="section-heading">Color Script</h2>
+          <p class="cs-intro reveal">
+            En producción, el color script es la guía emocional que une todas las escenas.
+            Cada nivel de <em>Ecos de Xàtiva</em> tiene su propia temperatura y atmósfera —
+            extraídas directamente de las capturas en juego y consensuadas con el equipo artístico.
+          </p>
+        </div>
+
+        <div class="cs-flow">
+
+          <!-- ACT I — APERTURA -->
+          <div class="cs-act reveal">
+            <!-- top color band -->
+            <div class="cs-band">
+              <div class="cs-band-seg" style="background:#989999"></div>
+              <div class="cs-band-seg" style="background:#231e15"></div>
+              <div class="cs-band-seg" style="background:#63615a"></div>
+              <div class="cs-band-seg" style="background:#efda98"></div>
+              <div class="cs-band-seg" style="background:#6a91a8"></div>
+              <div class="cs-band-seg" style="background:#634c2f"></div>
+            </div>
+            <div class="cs-act-thumb">
+              <img src="./Imagenes/Castillo4k.png" alt="Apertura — vista exterior del castillo" loading="lazy" />
+            </div>
+            <div class="cs-act-body">
+              <div class="cs-act-meta">
+                <span class="cs-act-num">Acto I</span>
+                <span class="cs-act-title">Apertura</span>
+              </div>
+              <div class="cs-swatches">
+                <div class="cs-sw cs-sw--dom" style="background:#989999" data-hex="#989999" title="#989999"></div>
+                <div class="cs-sw" style="background:#231e15" data-hex="#231e15" title="#231e15"></div>
+                <div class="cs-sw" style="background:#63615a" data-hex="#63615a" title="#63615a"></div>
+                <div class="cs-sw" style="background:#efda98" data-hex="#efda98" title="#efda98"></div>
+                <div class="cs-sw" style="background:#6a91a8" data-hex="#6a91a8" title="#6a91a8"></div>
+                <div class="cs-sw" style="background:#634c2f" data-hex="#634c2f" title="#634c2f"></div>
+              </div>
+              <p class="cs-act-mood">Dorado · Atmósfera · Contemplación</p>
+            </div>
+          </div>
+
+          <!-- ACT II — SALA DEL MENÚ -->
+          <div class="cs-act reveal">
+            <div class="cs-band">
+              <div class="cs-band-seg" style="background:#4d3520"></div>
+              <div class="cs-band-seg" style="background:#2b1c10"></div>
+              <div class="cs-band-seg" style="background:#664a30"></div>
+              <div class="cs-band-seg" style="background:#995e2d"></div>
+              <div class="cs-band-seg" style="background:#8f7051"></div>
+              <div class="cs-band-seg" style="background:#735e48"></div>
+            </div>
+            <div class="cs-act-thumb">
+              <img src="./Imagenes/MenuInicio.png" alt="Sala del Menú" loading="lazy" />
+            </div>
+            <div class="cs-act-body">
+              <div class="cs-act-meta">
+                <span class="cs-act-num">Acto II</span>
+                <span class="cs-act-title">Sala del Menú</span>
+              </div>
+              <div class="cs-swatches">
+                <div class="cs-sw cs-sw--dom" style="background:#4d3520" data-hex="#4d3520" title="#4d3520"></div>
+                <div class="cs-sw" style="background:#2b1c10" data-hex="#2b1c10" title="#2b1c10"></div>
+                <div class="cs-sw" style="background:#664a30" data-hex="#664a30" title="#664a30"></div>
+                <div class="cs-sw" style="background:#995e2d" data-hex="#995e2d" title="#995e2d"></div>
+                <div class="cs-sw" style="background:#8f7051" data-hex="#8f7051" title="#8f7051"></div>
+                <div class="cs-sw" style="background:#735e48" data-hex="#735e48" title="#735e48"></div>
+              </div>
+              <p class="cs-act-mood">Ámbar · Penumbra · Decisión</p>
+            </div>
+          </div>
+
+          <!-- ACT III — PASILLO SUBTERRÁNEO -->
+          <div class="cs-act reveal">
+            <div class="cs-band">
+              <div class="cs-band-seg" style="background:#261103"></div>
+              <div class="cs-band-seg" style="background:#552b0c"></div>
+              <div class="cs-band-seg" style="background:#9a5d22"></div>
+              <div class="cs-band-seg" style="background:#74461a"></div>
+              <div class="cs-band-seg" style="background:#daa34e"></div>
+              <div class="cs-band-seg" style="background:#ca8938"></div>
+            </div>
+            <div class="cs-act-thumb">
+              <img src="./Imagenes/NivelSubterraneoInicio.png" alt="Pasillo Subterráneo" loading="lazy" />
+            </div>
+            <div class="cs-act-body">
+              <div class="cs-act-meta">
+                <span class="cs-act-num">Acto III</span>
+                <span class="cs-act-title">Pasillo Subterráneo</span>
+              </div>
+              <div class="cs-swatches">
+                <div class="cs-sw cs-sw--dom" style="background:#261103" data-hex="#261103" title="#261103"></div>
+                <div class="cs-sw" style="background:#552b0c" data-hex="#552b0c" title="#552b0c"></div>
+                <div class="cs-sw" style="background:#9a5d22" data-hex="#9a5d22" title="#9a5d22"></div>
+                <div class="cs-sw" style="background:#74461a" data-hex="#74461a" title="#74461a"></div>
+                <div class="cs-sw" style="background:#daa34e" data-hex="#daa34e" title="#daa34e"></div>
+                <div class="cs-sw" style="background:#ca8938" data-hex="#ca8938" title="#ca8938"></div>
+              </div>
+              <p class="cs-act-mood">Oscuro · Tenso · Misterio</p>
+            </div>
+          </div>
+
+          <!-- ACT IV — MUSEO PRINCIPAL -->
+          <div class="cs-act reveal">
+            <div class="cs-band">
+              <div class="cs-band-seg" style="background:#1f130b"></div>
+              <div class="cs-band-seg" style="background:#512f16"></div>
+              <div class="cs-band-seg" style="background:#9c6628"></div>
+              <div class="cs-band-seg" style="background:#6e4823"></div>
+              <div class="cs-band-seg" style="background:#5f5a51"></div>
+              <div class="cs-band-seg" style="background:#9f1302"></div>
+            </div>
+            <div class="cs-act-thumb">
+              <img src="./Imagenes/MuseoInterior1.png" alt="Museo Principal" loading="lazy" />
+            </div>
+            <div class="cs-act-body">
+              <div class="cs-act-meta">
+                <span class="cs-act-num">Acto IV</span>
+                <span class="cs-act-title">Museo Principal</span>
+              </div>
+              <div class="cs-swatches">
+                <div class="cs-sw cs-sw--dom" style="background:#1f130b" data-hex="#1f130b" title="#1f130b"></div>
+                <div class="cs-sw" style="background:#512f16" data-hex="#512f16" title="#512f16"></div>
+                <div class="cs-sw" style="background:#9c6628" data-hex="#9c6628" title="#9c6628"></div>
+                <div class="cs-sw" style="background:#6e4823" data-hex="#6e4823" title="#6e4823"></div>
+                <div class="cs-sw" style="background:#5f5a51" data-hex="#5f5a51" title="#5f5a51"></div>
+                <div class="cs-sw" style="background:#9f1302" data-hex="#9f1302" title="#9f1302"></div>
+              </div>
+              <p class="cs-act-mood">Piedra · Luz difusa · Revelación</p>
+            </div>
+          </div>
+
+          <!-- ACT V — CAMPO DE ENTRENAMIENTO -->
+          <div class="cs-act reveal">
+            <div class="cs-band">
+              <div class="cs-band-seg" style="background:#181a19"></div>
+              <div class="cs-band-seg" style="background:#6a9566"></div>
+              <div class="cs-band-seg" style="background:#5ca8d5"></div>
+              <div class="cs-band-seg" style="background:#55695c"></div>
+              <div class="cs-band-seg" style="background:#9c9f9f"></div>
+              <div class="cs-band-seg" style="background:#999e6f"></div>
+            </div>
+            <div class="cs-act-thumb">
+              <img src="./Imagenes/CampoEntrenamiento1.png" alt="Campo de Entrenamiento" loading="lazy" />
+            </div>
+            <div class="cs-act-body">
+              <div class="cs-act-meta">
+                <span class="cs-act-num">Acto V</span>
+                <span class="cs-act-title">Campo de Entrenamiento</span>
+              </div>
+              <div class="cs-swatches">
+                <div class="cs-sw cs-sw--dom" style="background:#181a19" data-hex="#181a19" title="#181a19"></div>
+                <div class="cs-sw" style="background:#6a9566" data-hex="#6a9566" title="#6a9566"></div>
+                <div class="cs-sw" style="background:#5ca8d5" data-hex="#5ca8d5" title="#5ca8d5"></div>
+                <div class="cs-sw" style="background:#55695c" data-hex="#55695c" title="#55695c"></div>
+                <div class="cs-sw" style="background:#9c9f9f" data-hex="#9c9f9f" title="#9c9f9f"></div>
+                <div class="cs-sw" style="background:#999e6f" data-hex="#999e6f" title="#999e6f"></div>
+              </div>
+              <p class="cs-act-mood">Cielo · Tierra · Acción</p>
+            </div>
+          </div>
+
+        </div><!-- /.cs-flow -->
+
+      </div><!-- /.container -->
     </section>
 
     <!-- ============================================================
