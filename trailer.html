@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ecos de Xàtiva — Tráiler Oficial</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; background: #000; overflow: hidden; -webkit-font-smoothing: antialiased; }
+
+:root {
+  --gold: #E8B53A;
+  --red:  #B9242C;
+  --tx:   #F4E8D0;
+  --tx2:  rgba(244,232,208,.55);
+  --tx3:  rgba(244,232,208,.22);
+}
+
+/* ── INTRO ─────────────────────────────────────────────── */
+#intro {
+  position: fixed; inset: 0; background: #000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 100; gap: 0;
+}
+#intro.hide { animation: fadeOut 1s ease forwards; }
+@keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+
+.i-logo  { width: min(280px, 55vw); margin-bottom: 28px; opacity: 0; animation: up 1s ease .4s both;
+           filter: drop-shadow(0 0 28px rgba(232,181,58,.2)); }
+.i-title { font: 700 clamp(22px,5vw,48px)/1 Georgia, serif; letter-spacing: .4em;
+           text-transform: uppercase; color: var(--tx); margin-bottom: 10px;
+           opacity: 0; animation: up 1s ease .85s both; }
+.i-sub   { font: 400 11px/1 Arial, sans-serif; letter-spacing: .3em; text-transform: uppercase;
+           color: var(--gold); margin-bottom: 50px; opacity: 0; animation: up 1s ease 1.2s both; }
+#play-btn {
+  position: relative; padding: 16px 56px; background: transparent;
+  border: 1px solid var(--gold); color: var(--gold);
+  font: 600 11px/1 Arial, sans-serif; letter-spacing: .3em; text-transform: uppercase;
+  cursor: pointer; overflow: hidden; opacity: 0; animation: up 1s ease 1.7s both; transition: color .35s;
+}
+#play-btn::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
+}
+#play-btn:hover::before { transform: scaleX(1); }
+#play-btn:hover { color: #000; }
+#play-btn span { position: relative; z-index: 1; }
+.i-hint { font: 400 9px/1 Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase;
+          color: var(--tx3); margin-top: 18px; opacity: 0; animation: up 1s ease 2.1s both; }
+.i-back { position: absolute; top: 24px; left: 28px; font: 400 9px/1 Arial, sans-serif;
+          letter-spacing: .2em; text-transform: uppercase; color: var(--tx3);
+          text-decoration: none; opacity: 0; animation: up 1s ease 2.4s both; transition: color .3s; }
+.i-back:hover { color: var(--gold); }
+@keyframes up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── TRAILER ───────────────────────────────────────────── */
+#trailer { position: fixed; inset: 0; background: #000; display: none; overflow: hidden; }
+
+/* Imágenes de fondo */
+.bg-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.5s ease;
+  animation: kenburns 20s ease-out both;
+  filter: brightness(0.82) saturate(0.85) sepia(0.10);
+}
+.bg-img.visible { opacity: 1; }
+
+/* Ken Burns variants */
+@keyframes kenburns {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1.0); }
+}
+@keyframes kbIn {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.12); }
+}
+@keyframes kbRight {
+  from { transform: scale(1.07) translateX(-1.8%); }
+  to   { transform: scale(1.0)  translateX(1.8%); }
+}
+@keyframes kbLeft {
+  from { transform: scale(1.07) translateX(1.8%); }
+  to   { transform: scale(1.0)  translateX(-1.8%); }
+}
+.bg-img.kb-in    { animation: kbIn    20s ease-in-out both; }
+.bg-img.kb-right { animation: kbRight 22s ease-in-out both; }
+.bg-img.kb-left  { animation: kbLeft  22s ease-in-out both; }
+
+/* Capa de color cálido sobre imágenes */
+#warm-grade {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: rgba(100, 45, 5, 0.08);
+}
+
+/* Vignette */
+.vignette {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.78) 100%);
+}
+
+/* Grano de film */
+.grain {
+  position: absolute; inset: -10%; z-index: 3; pointer-events: none; opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px; animation: grain .1s steps(1) infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0,0); }      25%  { transform: translate(-2%,-2%); }
+  50%  { transform: translate(2%, 2%); }   75%  { transform: translate(-1%, 3%); }
+  100% { transform: translate(2%,-1%); }
+}
+
+/* Partículas canvas */
+#particles { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+
+/* Barras cinemáticas */
+.bar { position: absolute; left: 0; right: 0; background: #000; z-index: 10; height: 0; transition: height 1.6s ease; }
+.bar.top    { top: 0; }
+.bar.bottom { bottom: 0; }
+.bar.open   { height: 11vh; }
+
+/* Texto overlay */
+#text-layer { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+
+.scene-text {
+  position: absolute; left: 0; right: 0; text-align: center; padding: 0 8vw;
+  opacity: 0; transition: opacity 1s ease, transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.scene-text.center { top: 50%; transform: translateY(-50%) scale(0.97); }
+.scene-text.bottom { bottom: 16vh; transform: translateY(16px); }
+.scene-text.top    { top: 16vh;    transform: translateY(-12px); }
+.scene-text.visible { opacity: 1; }
+.scene-text.center.visible { transform: translateY(-50%) scale(1.0); }
+.scene-text.bottom.visible { transform: translateY(0); }
+.scene-text.top.visible    { transform: translateY(0); }
+
+/* Estilos de texto */
+.t-kicker {
+  font: 400 clamp(8px,1.1vw,11px)/1 Arial, sans-serif;
+  letter-spacing: .4em; text-transform: uppercase; color: var(--gold);
+  display: block; margin-bottom: 12px;
+}
+.t-main {
+  font: 700 clamp(28px,6vw,85px)/1.05 Georgia, serif;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--tx);
+  text-shadow: 0 2px 20px rgba(0,0,0,.98);
+}
+.t-huge {
+  font: 700 clamp(58px,13vw,165px)/1 Georgia, serif;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--gold);
+  text-shadow: 0 0 80px rgba(232,181,58,.65), 0 0 200px rgba(232,181,58,.22);
+  display: inline-block;
+  animation: hugeReveal 1.5s cubic-bezier(0.15, 0.7, 0.15, 1) both;
+}
+@keyframes hugeReveal {
+  from { letter-spacing: 0.55em; filter: blur(8px); opacity: 0; }
+  to   { letter-spacing: 0.15em; filter: blur(0);   opacity: 1; }
+}
+.t-weapon {
+  font: 700 clamp(16px,3.2vw,46px)/1 Arial, sans-serif;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
+  display: block; margin-bottom: 6px;
+}
+.t-wsub {
+  font: 400 clamp(8px,1.1vw,11px)/1 Arial, sans-serif;
+  letter-spacing: .34em; text-transform: uppercase; color: rgba(232,181,58,.5);
+  display: block;
+}
+.t-italic {
+  font: 400 italic clamp(20px,4.5vw,64px)/1.2 Georgia, serif;
+  color: var(--tx); text-shadow: 0 2px 16px rgba(0,0,0,.96);
+}
+
+/* Logo scene */
+#logo-scene {
+  position: absolute; inset: 0; z-index: 25;
+  display: none; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 1.4s ease;
+}
+#logo-scene.visible { opacity: 1; }
+.logo-img {
+  width: min(320px, 58vw);
+  filter: drop-shadow(0 0 50px rgba(232,181,58,.4)) drop-shadow(0 0 110px rgba(232,181,58,.15));
+}
+
+/* Title card final */
+#title-card {
+  position: absolute; inset: 0; background: #000; z-index: 40;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 2s ease; padding: 20px; text-align: center;
+}
+#title-card.visible { opacity: 1; }
+
+.tc-logo  { width: min(130px,30vw); margin-bottom: 30px; opacity: 0; transition: opacity 1s ease;
+            filter: drop-shadow(0 0 18px rgba(232,181,58,.25)); }
+.tc-title { font: 700 clamp(32px,8vw,108px)/1 Georgia, serif; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--tx); margin-bottom: 12px;
+            opacity: 0; transition: opacity 1s ease .3s; }
+.tc-tag   { font: 400 italic clamp(11px,1.8vw,19px)/1.4 Georgia, serif; color: var(--tx2);
+            max-width: 520px; opacity: 0; transition: opacity 1s ease .7s; margin-bottom: 22px; }
+.tc-rule  { width: 0; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+            transition: width 1s ease 1s; margin-bottom: 20px; }
+.tc-plat  { font: 400 clamp(8px,1.2vw,11px)/1 Arial, sans-serif; letter-spacing: .36em;
+            text-transform: uppercase; color: var(--gold);
+            opacity: 0; transition: opacity 1s ease 1.3s; margin-bottom: 8px; }
+.tc-studio{ font: 400 clamp(7px,1vw,10px)/1 Arial, sans-serif; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--tx3);
+            opacity: 0; transition: opacity 1s ease 1.7s; margin-bottom: 40px; }
+.tc-el    { opacity: 1; } /* clase para activar todas las transiciones */
+
+#replay-btn {
+  padding: 12px 38px; background: transparent;
+  border: 1px solid rgba(232,181,58,.3); color: rgba(232,181,58,.55);
+  font: 400 10px/1 Arial, sans-serif; letter-spacing: .3em; text-transform: uppercase;
+  cursor: pointer; margin-bottom: 12px;
+  opacity: 0; transition: opacity 1s ease 2.4s, color .3s, border-color .3s;
+}
+#replay-btn.tc-el { opacity: 1; }
+#replay-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+#back-link {
+  font: 400 10px/1 Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--tx3); text-decoration: none;
+  opacity: 0; transition: opacity 1s ease 2.9s, color .3s;
+}
+#back-link.tc-el { opacity: 1; }
+#back-link:hover { color: var(--tx2); }
+
+/* Controles */
+#controls { position: absolute; bottom: 22px; right: 22px; z-index: 50; display: flex; gap: 8px; }
+.ctrl { padding: 7px 15px; background: rgba(0,0,0,.5); border: 1px solid rgba(244,232,208,.1);
+        color: rgba(244,232,208,.4); font: 400 9px/1 Arial, sans-serif;
+        letter-spacing: .2em; text-transform: uppercase; cursor: pointer;
+        backdrop-filter: blur(8px); transition: color .3s, border-color .3s; }
+.ctrl:hover { color: var(--gold); border-color: rgba(232,181,58,.35); }
+
+/* Marco de esquinas en title card */
+.tc-frame {
+  position: absolute; inset: clamp(14px, 3.5vw, 38px);
+  border: 1px solid rgba(232,181,58,0.07);
+  pointer-events: none;
+  opacity: 0; transition: opacity 2.8s ease;
+}
+.tc-frame.tc-el { opacity: 1; }
+.tc-frame::before, .tc-frame::after {
+  content: ''; position: absolute;
+  width: 38px; height: 38px;
+  border-color: rgba(232,181,58,0.32);
+  border-style: solid;
+}
+.tc-frame::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.tc-frame::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* Logos partners en title card */
+.tc-partners {
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+  opacity: 0; transition: opacity 1.2s ease 0.1s; margin-bottom: 30px;
+}
+.tc-partners.tc-el { opacity: 1; }
+.tc-partner-logo {
+  height: 26px; width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.35;
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <a href="./index.html" class="i-back">← Volver al proyecto</a>
+  <img src="./Imagenes/LogoTFGSinFondo.png" class="i-logo" alt="NH VR Experiences"/>
+  <h1 class="i-title">Ecos de Xàtiva</h1>
+  <p class="i-sub">Tráiler oficial · NH VR Experiences · 2025</p>
+  <button id="play-btn"><span>▶&nbsp;&nbsp;Reproducir tráiler</span></button>
+  <p class="i-hint">Sube el volumen para la experiencia completa</p>
+</div>
+
+<!-- TRAILER -->
+<div id="trailer">
+
+  <!-- Fondo de imágenes -->
+  <div id="bg-layer"></div>
+
+  <!-- Efectos pasivos -->
+  <div id="warm-grade" aria-hidden="true"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+  <canvas id="particles"></canvas>
+
+  <!-- Barras cinemáticas -->
+  <div class="bar top"    id="bar-top"></div>
+  <div class="bar bottom" id="bar-bottom"></div>
+
+  <!-- Textos -->
+  <div id="text-layer"></div>
+
+  <!-- Logo scene -->
+  <div id="logo-scene">
+    <img src="./Imagenes/LogoTFGSinFondo.png" class="logo-img" alt="NH VR Experiences"/>
+  </div>
+
+  <!-- Title card final -->
+  <div id="title-card">
+    <div class="tc-frame" id="tcf" aria-hidden="true"></div>
+    <img src="./Imagenes/IconoTFG.png"          class="tc-logo"   id="tcl" alt=""/>
+    <h1 class="tc-title" id="tct">Ecos de Xàtiva</h1>
+    <p  class="tc-tag"   id="tctg">Un videojuego construido desde el rigor histórico</p>
+    <div class="tc-rule" id="tcr"></div>
+    <p  class="tc-plat"  id="tcp">Meta Quest 3 &nbsp;·&nbsp; Unreal Engine 5.4</p>
+    <p  class="tc-studio" id="tcs">Nacho &amp; Hugo VR Experiences &nbsp;·&nbsp; TFG DNAV · UCV · 2025</p>
+    <div class="tc-partners" id="tcp2">
+      <img src="./Imagenes/Unreal.svg" class="tc-partner-logo" alt="Unreal Engine 5.4"/>
+      <img src="./Imagenes/UCV.png"    class="tc-partner-logo" alt="UCV"/>
+    </div>
+    <button id="replay-btn">▶&nbsp;&nbsp;Reproducir de nuevo</button>
+    <a href="./index.html" id="back-link">← Ver la web completa del proyecto</a>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgm"  src="./Imagenes/MusicaTrailer.mp3" loop   preload="auto"></audio>
+  <audio id="narr" src="./Imagenes/Narracion.mp3"            preload="auto"></audio>
+
+  <!-- Controles -->
+  <div id="controls">
+    <button class="ctrl" id="mute-btn">🔊&nbsp; Silencio</button>
+    <button class="ctrl" id="skip-btn">Saltar →</button>
+  </div>
+
+</div>
+
+<script>
+/* ─────────────────────────────────────────────────────────────
+   ECOS DE XÀTIVA — Trailer simple y funcional
+   Narración: ~44.75s  |  empieza a los 3s del play
+   Total trailer: ~52s + title card
+───────────────────────────────────────────────────────────── */
+
+const bgm       = document.getElementById('bgm');
+const narr      = document.getElementById('narr');
+const bgLayer   = document.getElementById('bg-layer');
+const textLayer = document.getElementById('text-layer');
+const barTop    = document.getElementById('bar-top');
+const barBot    = document.getElementById('bar-bottom');
+const logoScene = document.getElementById('logo-scene');
+const titleCard = document.getElementById('title-card');
+const canvas    = document.getElementById('particles');
+const ctx       = canvas.getContext('2d');
+
+let currentBg   = null;
+let muted       = false;
+let particles   = [];
+let pfxActive   = false;
+let totalMs     = 52000; // duración aproximada antes del title card
+
+/* ── Resize ─────────────────────────────────────────────────── */
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+/* ── Partículas (ember suave) ───────────────────────────────── */
+function newParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: canvas.height + 8,
+    r: Math.random() * 1.8 + 0.5,
+    vy: -(Math.random() * 0.7 + 0.15),
+    vx: (Math.random() - 0.5) * 0.25,
+    alpha: Math.random() * 0.5 + 0.15,
+    color: Math.random() > 0.45 ? '#E8B53A' : '#FF7830',
+    life: 1
+  };
+}
+function tickParticles() {
+  if (!pfxActive) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (Math.random() > 0.7) particles.push(newParticle());
+  if (particles.length > 150) particles.shift();
+  particles = particles.filter(p => {
+    p.x += p.vx; p.y += p.vy; p.life -= 0.0016;
+    if (p.y < -10 || p.life <= 0) return false;
+    ctx.save();
+    ctx.shadowBlur = 10; ctx.shadowColor = p.color;
+    ctx.globalAlpha = p.alpha * p.life;
+    ctx.fillStyle = p.color;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+    return true;
+  });
+  requestAnimationFrame(tickParticles);
+}
+
+/* ── BG helper ──────────────────────────────────────────────── */
+function showBg(src, fadeIn = 1500, fadeOut = 1000, kb = '') {
+  if (currentBg) {
+    const old = currentBg;
+    old.style.transition = `opacity ${fadeOut}ms ease`;
+    old.style.opacity = '0';
+    setTimeout(() => old.remove(), fadeOut + 100);
+  }
+  const div = document.createElement('div');
+  div.className = 'bg-img' + (kb ? ' ' + kb : '');
+  div.style.backgroundImage = `url('${src}')`;
+  div.style.transition = `opacity ${fadeIn}ms ease`;
+  bgLayer.appendChild(div);
+  currentBg = div;
+  requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('visible')));
+}
+
+function clearBg(fadeOut = 1200) {
+  if (!currentBg) return;
+  const old = currentBg; currentBg = null;
+  old.style.transition = `opacity ${fadeOut}ms ease`;
+  old.style.opacity = '0';
+  setTimeout(() => old.remove(), fadeOut + 100);
+}
+
+/* ── Text helper ────────────────────────────────────────────── */
+function showText(html, position = 'center', fadeIn = 1000) {
+  const el = document.createElement('div');
+  el.className = `scene-text ${position}`;
+  el.style.transition = `opacity ${fadeIn}ms ease`;
+  el.innerHTML = html;
+  textLayer.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+  return el;
+}
+
+function clearText(fadeOut = 700) {
+  Array.from(textLayer.children).forEach(c => {
+    c.style.transition = `opacity ${fadeOut}ms ease`;
+    c.style.opacity = '0';
+  });
+  setTimeout(() => { textLayer.innerHTML = ''; }, fadeOut + 60);
+}
+
+/* ── Logo ───────────────────────────────────────────────────── */
+function showLogo() {
+  logoScene.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => logoScene.classList.add('visible')));
+}
+function hideLogo(delay = 0) {
+  setTimeout(() => {
+    logoScene.classList.remove('visible');
+    setTimeout(() => { logoScene.style.display = 'none'; }, 1500);
+  }, delay);
+}
+
+/* ── Title card ─────────────────────────────────────────────── */
+function showTitleCard() {
+  titleCard.classList.add('visible');
+  // Activar cada elemento con delay via CSS transitions + clase
+  setTimeout(() => {
+    const frame = document.getElementById('tcf');
+    if (frame) frame.classList.add('tc-el');
+    ['tcl','tct','tctg','tcr','tcp','tcs','tcp2','replay-btn','back-link'].forEach((id, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add('tc-el');
+        if (id === 'tcr') el.style.width = 'min(160px, 42vw)';
+      }, i * 350);
+    });
+  }, 400);
+  // setProgress(100);
+}
+
+/* ── Delay helper ───────────────────────────────────────────── */
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+/* ────────────────────────────────────────────────────────────
+   SECUENCIA DEL TRÁILER
+   Narración empieza a los 3s.
+   Escenas ajustadas para dejar respirar el audio.
+   Total: ~52s antes del title card.
+──────────────────────────────────────────────────────────── */
+async function runTrailer() {
+
+  pfxActive = true; tickParticles();
+
+  // Barras cinemáticas abren
+  await wait(200);
+  barTop.classList.add('open');
+  barBot.classList.add('open');
+
+  /* ESCENA 1 — Castillo exterior */
+  await wait(2300);
+  showBg('./Imagenes/FondoCastillo.jpg', 2000, 1000, 'kenburns');
+
+  await wait(3000);
+  showText(`<span class="t-kicker">Xàtiva · España · Siglo XV</span>`, 'bottom', 1500);
+
+  /* ESCENA 2 — Interior museo */
+  await wait(7500);
+  clearText(1000);
+  showBg('./Imagenes/MuseoInterior2.png', 1800, 1200, 'kb-right');
+
+  /* ESCENA 3 — Nivel subterráneo */
+  await wait(7500);
+  showBg('./Imagenes/NivelSubterraneoInicio.png', 1800, 1200, 'kb-left');
+
+  /* ESCENA 4 — HASTA AHORA */
+  await wait(6500);
+  clearBg(800);
+  await wait(1000);
+  showText(`<p class="t-huge">Hasta ahora</p>`, 'center', 600);
+
+  await wait(2500);
+  clearText(600);
+  await wait(400);
+
+  /* ESCENAS DE ACCIÓN — capturas ingame */
+  showBg('./Imagenes/CampoEntrenamiento2.png', 1200, 800, 'kb-in');
+  await wait(4000);
+
+  showBg('./Imagenes/CampoEntrenamiento5.png', 1200, 800, 'kenburns');
+  await wait(4000);
+
+  showBg('./Imagenes/NivelSubterraneoInicio2.png', 1200, 800, 'kb-right');
+  await wait(4000);
+
+  /* CLÍMAX — MuseoInterior5 */
+  showBg('./Imagenes/MuseoInterior5.png', 1800, 1200, 'kb-in');
+
+  /* TITLE CARD */
+  await wait(3000);
+  clearBg(1200);
+  await wait(1800);
+  showTitleCard();
+}
+
+/* ── Skip ───────────────────────────────────────────────────── */
+function doSkip() {
+  clearText(300);
+  clearBg(300);
+  hideLogo();
+  bgLayer.innerHTML = ''; currentBg = null;
+  setTimeout(showTitleCard, 500);
+}
+
+/* ── Controles ──────────────────────────────────────────────── */
+document.getElementById('mute-btn').addEventListener('click', () => {
+  muted = !muted;
+  bgm.muted = narr.muted = muted;
+  document.getElementById('mute-btn').textContent = muted ? '🔇  Sonido' : '🔊  Silencio';
+});
+document.getElementById('skip-btn').addEventListener('click', doSkip);
+document.getElementById('replay-btn').addEventListener('click', () => location.reload());
+
+/* ── Arrancar audio + secuencia ─────────────────────────────── */
+function startTrailer() {
+  bgm.volume = 0;
+  bgm.play().catch(() => {});
+  const fadeIn = setInterval(() => {
+    if (bgm.volume < 0.55) bgm.volume = Math.min(0.55, bgm.volume + 0.02);
+    else clearInterval(fadeIn);
+  }, 120);
+  setTimeout(() => { narr.volume = 0.9; narr.play().catch(() => {}); }, 5000);
+  document.getElementById('trailer').style.display = 'block';
+  runTrailer();
+}
+
+/* ── Play (desde intro) ─────────────────────────────────────── */
+document.getElementById('play-btn').addEventListener('click', () => {
+  const intro = document.getElementById('intro');
+  intro.classList.add('hide');
+  setTimeout(() => { intro.style.display = 'none'; }, 1200);
+  startTrailer();
+});
+
+/* ── Autoplay si viene desde index.html ─────────────────────── */
+if (new URLSearchParams(location.search).get('auto') === '1') {
+  document.getElementById('intro').style.display = 'none';
+  startTrailer();
+}
+</script>
+</body>
+</html>
