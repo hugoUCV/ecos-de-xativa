@@ -3746,6 +3746,50 @@
       transition: transform 0.55s var(--ease); }
     .level-card:hover .nivel-img-wrap img { transform: scale(1.06); }
 
+  /* ─── BLUEPRINTS SECTION ──────────────────────────────────── */
+  #blueprints { padding: 120px 0; position: relative; }
+  .bp-header { text-align: center; margin-bottom: 52px; }
+  .bp-header p { font-size: .9rem; color: var(--text-m); max-width: 560px; margin: 16px auto 0; line-height: 1.8; }
+
+  .bp-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+  .bp-chip {
+    padding: 7px 14px; border: 1px solid rgba(232,181,58,.18); background: rgba(232,181,58,.04);
+    color: var(--text-m); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px; transition: border-color .25s, color .25s, background .25s;
+    font-family: 'Courier New', monospace; white-space: nowrap;
+  }
+  .bp-chip:hover, .bp-chip.active {
+    border-color: var(--gold); color: var(--gold); background: rgba(232,181,58,.09);
+  }
+
+  .bp-viewer-wrap {
+    position: relative; background: #0d0d0d; border: 1px solid rgba(232,181,58,.12);
+    border-radius: 4px; overflow: hidden; min-height: 580px;
+  }
+  .bp-viewer-wrap::before {
+    content: 'Cargando Blueprint…'; position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(244,232,208,.15); font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+    pointer-events: none; z-index: 0;
+  }
+  .bp-frame { display: block; width: 100%; height: 580px; border: none; position: relative; z-index: 1; }
+
+  .bp-info-bar {
+    display: flex; align-items: flex-start; gap: 20px; margin-top: 16px;
+    padding: 16px 20px; background: rgba(232,181,58,.03); border: 1px solid rgba(232,181,58,.08); border-radius: 3px;
+  }
+  .bp-info-name { font: 600 .85rem/1.2 'Courier New', monospace; color: var(--gold); letter-spacing: .04em; white-space: nowrap; padding-top: 2px; min-width: 200px; }
+  .bp-info-desc { font-size: .84rem; color: var(--text-m); line-height: 1.7; }
+  .bp-info-tag { margin-left: auto; font-size: .67rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(244,232,208,.28); white-space: nowrap; padding-top: 3px; }
+
+  @media (max-width: 640px) {
+    .bp-frame { height: 400px; }
+    .bp-viewer-wrap { min-height: 400px; }
+    .bp-info-bar { flex-direction: column; gap: 8px; }
+    .bp-info-name { min-width: 0; }
+    .bp-info-tag { margin-left: 0; }
+  }
+
   </style>
 </head>
 <body>
@@ -3827,6 +3871,7 @@
         <li><a href="#galeria-3d"     class="nav-link">3D</a></li>
         <li><a href="#wireframes"     class="nav-link">Wireframes</a></li>
         <li><a href="#color-script"   class="nav-link">Color Script</a></li>
+        <li><a href="#blueprints"     class="nav-link">Blueprints</a></li>
         <li><a href="#numeros"        class="nav-link">Cifras</a></li>
         <li><a href="#el-camino"      class="nav-link">Desarrollo</a></li>
         <li><a href="#estudio"        class="nav-link">Equipo</a></li>
@@ -5312,6 +5357,36 @@
       </div><!-- /.container -->
     </section>
 
+    <!-- ============================================================
+         SECTION — BLUEPRINTS
+    ============================================================ -->
+    <section id="blueprints" aria-labelledby="bp-heading">
+      <div class="container">
+
+        <div class="bp-header reveal">
+          <span class="section-label">10 — Blueprints</span>
+          <h2 id="bp-heading" class="section-heading">Lógica del juego</h2>
+          <p>Los 20 Blueprints que articulan los sistemas VR de Ecos de Xàtiva.<br>
+             Haz clic en cualquiera para inspeccionarlo en detalle.</p>
+        </div>
+
+        <div class="bp-chips reveal" id="bp-chips" data-delay="1"></div>
+
+        <div class="bp-viewer-wrap reveal" data-delay="2">
+          <iframe class="bp-frame" id="bp-frame"
+                  src="https://blueprintue.com/render/bwjy-y5x/"
+                  scrolling="no" allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="bp-info-bar reveal" data-delay="3">
+          <span class="bp-info-name" id="bp-name">BP_Cannon</span>
+          <span class="bp-info-desc" id="bp-desc">Sistema de disparo del cañón con Chaos Destruction y física procedural.</span>
+          <span class="bp-info-tag">Unreal Engine 5 &nbsp;·&nbsp; Blueprint</span>
+        </div>
+
+      </div>
+    </section>
 
     <!-- ============================================================
          SECTION 6 — DISEÑO DE NIVELES
@@ -5321,7 +5396,7 @@
 
         <div class="niveles-header">
           <div class="reveal">
-            <span class="section-label">10 — Niveles</span>
+            <span class="section-label">11 — Niveles</span>
             <h2 id="niveles-heading" class="section-heading">
               Cuatro espacios, una experiencia
             </h2>
@@ -5428,7 +5503,7 @@
           </div>
 
           <div class="estudio-content">
-            <span class="section-label">11 — Nacho &amp; Hugo VR Experiences</span>
+            <span class="section-label">12 — Nacho &amp; Hugo VR Experiences</span>
             <h2 id="estudio-heading" class="estudio-heading">El estudio</h2>
             <p class="estudio-body">
               Nacho &amp; Hugo VR Experiences es el estudio creativo formado por los dos autores
@@ -5525,7 +5600,7 @@
       <div class="container">
 
         <div class="numeros-header reveal">
-          <span class="section-label">12 — El proyecto en números</span>
+          <span class="section-label">13 — El proyecto en números</span>
           <h2 id="numeros-heading" class="section-heading">La escala del trabajo</h2>
         </div>
 
@@ -5617,7 +5692,7 @@
       <div class="container">
 
         <div class="timeline-header reveal">
-          <span class="section-label">13 — El proceso</span>
+          <span class="section-label">14 — El proceso</span>
           <h2 id="camino-heading" class="section-heading">El camino hasta aquí</h2>
           <p style="font-size:0.9rem;color:var(--text-m);max-width:520px;margin:18px auto 0;line-height:1.8;">
             28 semanas de concepto, prototipado, arte, código e iteración constante.
@@ -7677,11 +7752,12 @@
         'galeria-3d':     '07',
         'wireframes':     '08',
         'color-script':   '09',
-        'niveles':        '10',
-        'estudio':        '11',
-        'numeros':        '12',
-        'el-camino':      '13',
-        'descarga':       '14'
+        'blueprints':     '10',
+        'niveles':        '11',
+        'estudio':        '12',
+        'numeros':        '13',
+        'el-camino':      '14',
+        'descarga':       '15'
       };
 
       /* Build dots */
@@ -7869,6 +7945,56 @@
       });
     }
 
+    /* ── initBlueprints ─────────────────────────────────────────── */
+    function initBlueprints() {
+      var bps = [
+        { slug: 'bwjy-y5x',  name: 'BP_Cannon',                     desc: 'Sistema de disparo del cañón con Chaos Destruction y física procedural.' },
+        { slug: 'ht35l06a',  name: 'BP_Bow',                         desc: 'Mecánica de arco con física de cuerda procedural y disparo de flecha.' },
+        { slug: '2kz4g31-',  name: 'BP_Diana',                       desc: 'Diana interactiva para el campo de tiro con detección de impactos.' },
+        { slug: 'xs3f-plf',  name: 'BP_GuiaMenu',                    desc: 'NPC guía del menú con narración y bifurcación narrativa de rutas.' },
+        { slug: 'nkv3j33o',  name: 'BP_TestBow',                     desc: 'Prototipo de prueba del sistema de arco durante la fase de desarrollo.' },
+        { slug: '49sgwxnf',  name: 'ProjectileArrow',                desc: 'Flecha disparable con física de proyectil realista y colisión.' },
+        { slug: '1kmbzfqx',  name: 'BP_Antorcha',                    desc: 'Antorcha interactiva con partículas Niagara y luz dinámica.' },
+        { slug: '47tj8kh9',  name: 'BP_BoxTeleportFade',             desc: 'Sistema de teletransporte con transición fade para la navegación VR.' },
+        { slug: 'yinn4lwq',  name: 'BP_BoxTeleportFade_ESCENARIO',   desc: 'Variante del teletransporte adaptada al escenario principal.' },
+        { slug: '26myywsn',  name: 'Bp_CannonBall',                  desc: 'Proyectil de cañón con Chaos Destruction al impactar el muro.' },
+        { slug: 'wiyv-j78',  name: 'BP_CuttableActorCylinder',       desc: 'Actor cortable en tiempo real con sistema de audio reactivo.' },
+        { slug: 'jpf7bizo',  name: 'BP_MuroChaos',                   desc: 'Muro destructible con simulación física Chaos completa.' },
+        { slug: 'l81rkmuw',  name: 'BP_ObjetoInteractivo',           desc: 'Sistema base para todos los objetos interactuables de la experiencia.' },
+        { slug: '7ar8wnp9',  name: 'BP_OpeningVR',                   desc: 'Secuencia de apertura cinematográfica de la experiencia VR.' },
+        { slug: 'o1_e9ot7',  name: 'BP_Palanca',                     desc: 'Palanca física que abre la puerta del museo al accionarse.' },
+        { slug: 'fzyhg4l0',  name: 'BP_PuertaSubible',               desc: 'Puerta elevable con animación procedural y lógica de estado.' },
+        { slug: '_ts8o0dr',  name: 'BP_Espada_Sonido',               desc: 'Espada con sistema de corte procedural y audio espacial reactivo.' },
+        { slug: '-it9azpj',  name: 'BP_MenuInicioEstructuraCampo',   desc: 'Lógica del menú — ruta Campo de Entrenamiento.' },
+        { slug: '7kixjmr6',  name: 'BP_MenuInicioEstructuraSendero', desc: 'Lógica del menú — ruta Sendero de los Reyes.' },
+        { slug: 'qogxa38o',  name: 'BP_VRPawn_SistemaInteractivo',   desc: 'Pawn VR con el sistema completo de interacción de manos y objetos.' }
+      ];
+
+      var chips  = document.getElementById('bp-chips');
+      var frame  = document.getElementById('bp-frame');
+      var nameEl = document.getElementById('bp-name');
+      var descEl = document.getElementById('bp-desc');
+      if (!chips || !frame) return;
+
+      function selectBp(i) {
+        var bp = bps[i];
+        frame.src = 'https://blueprintue.com/render/' + bp.slug + '/';
+        if (nameEl) nameEl.textContent = bp.name;
+        if (descEl) descEl.textContent = bp.desc;
+        chips.querySelectorAll('.bp-chip').forEach(function(c, j) {
+          c.classList.toggle('active', j === i);
+        });
+      }
+
+      bps.forEach(function(bp, i) {
+        var c = document.createElement('button');
+        c.className = 'bp-chip' + (i === 0 ? ' active' : '');
+        c.textContent = bp.name;
+        c.addEventListener('click', function() { selectBp(i); });
+        chips.appendChild(c);
+      });
+    }
+
     function boot() {
       safe(initSplash,         'initSplash');
       safe(initCustomCursor,   'initCustomCursor');
@@ -7902,6 +8028,7 @@
       safe(initDescargaParticles,  'initDescargaParticles');
       safe(initCopyEmail,          'initCopyEmail');
       safe(initTrailerTransition,  'initTrailerTransition');
+      safe(initBlueprints,         'initBlueprints');
     }
 
     if (document.readyState === 'loading') {
