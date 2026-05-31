@@ -2,11 +2,26 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#000000"/>
 <title>Ecos de Xàtiva — Tráiler Oficial</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; background: #000; overflow: hidden; -webkit-font-smoothing: antialiased; }
+html, body {
+  width: 100%;
+  height: 100vh;          /* fallback navegadores antiguos */
+  height: 100dvh;         /* dynamic viewport: ignora la barra de URL en móvil */
+  background: #000;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+#trailer, #intro {
+  height: 100vh;
+  height: 100dvh;
+}
 
 :root {
   --gold: #E8B53A;
@@ -692,7 +707,7 @@ if (isFirstVisit) {
 /* ── Transición brutal al index ────────────────────────────── */
 function transitionToIndex() {
   const overlay = document.getElementById('end-transition');
-  if (!overlay) { location.href = './index.html'; return; }
+  if (!overlay) { exitCinemaFullscreen(); location.href = './index.html'; return; }
   overlay.classList.add('active');
   /* fade out audio en paralelo */
   try {
@@ -702,8 +717,19 @@ function transitionToIndex() {
       if (bgm.volume <= 0) clearInterval(fadeOut);
     }, 60);
   } catch(e) {}
+  /* Salir del fullscreen antes del redirect para que el index abra normal */
+  setTimeout(exitCinemaFullscreen, 2300);
   /* redirect al index después de la animación completa */
   setTimeout(() => { location.href = './index.html'; }, 2600);
+}
+
+/* ── Salir de fullscreen ───────────────────────────────────── */
+function exitCinemaFullscreen() {
+  try {
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+  } catch(e) {}
 }
 
 /* ── Skip ───────────────────────────────────────────────────── */
@@ -739,8 +765,38 @@ function startTrailer() {
   runTrailer();
 }
 
+/* ── Detección de móvil ─────────────────────────────────────── */
+const isMobile = /Android|iPhone|iPad|iPod|Mobile|BlackBerry|webOS|Opera Mini/i.test(navigator.userAgent)
+              || (window.matchMedia && window.matchMedia('(pointer:coarse) and (max-width:1024px)').matches);
+
+/* ── Pantalla completa (cinematográfica en móvil) ──────────── */
+async function requestCinemaFullscreen() {
+  /* Solo lo intentamos en móvil — en desktop el navegador ya ocupa la ventana */
+  if (!isMobile) return;
+  const elem = document.documentElement;
+  try {
+    if (elem.requestFullscreen)             await elem.requestFullscreen({ navigationUI: 'hide' });
+    else if (elem.webkitRequestFullscreen)  elem.webkitRequestFullscreen();
+    else if (elem.msRequestFullscreen)      elem.msRequestFullscreen();
+  } catch(e) {
+    /* iOS Safari no permite fullscreen en <html>/div, solo en <video>.
+       Fallback: forzar scroll para ocultar la barra de URL al máximo. */
+    try { window.scrollTo(0, 1); } catch(_) {}
+  }
+  /* Bloquear orientación landscape si está disponible (Android principalmente) */
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock('landscape').catch(() => {});
+    }
+  } catch(_) {}
+}
+
 /* ── Play (desde intro) ─────────────────────────────────────── */
 document.getElementById('play-btn').addEventListener('click', () => {
+  /* IMPORTANTE: la llamada a fullscreen debe ocurrir DENTRO del handler del
+     gesto del usuario, antes de cualquier await/setTimeout, para que el
+     navegador la considere autorizada. */
+  requestCinemaFullscreen();
   const intro = document.getElementById('intro');
   intro.classList.add('hide');
   setTimeout(() => { intro.style.display = 'none'; }, 1200);
