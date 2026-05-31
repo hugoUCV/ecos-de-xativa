@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memoria · Ecos de Xàtiva — TFG DNAV UCV</title>
+  <meta name="description" content="Memoria escrita del Trabajo Fin de Grado Ecos de Xàtiva, una experiencia VR para el Castillo de Xàtiva desarrollada en Unreal Engine 5.4 para Meta Quest 3." />
+  <link rel="icon" href="./Imagenes/IconoTFG.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base:      #1F1410;
+      --bg-panel:     #2A1C14;
+      --bg-card:      #3E2A1C;
+      --bg-recessed:  #0F0E0D;
+      --gold:         #E8B53A;
+      --gold-light:   #F2D27A;
+      --gold-dim:     rgba(232,181,58,0.12);
+      --gold-mid:     rgba(232,181,58,0.50);
+      --carmesi:      #B9242C;
+      --text-h:       #F4E8D0;
+      --text-m:       #C9B998;
+      --text-l:       rgba(244,232,208,0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--bg-base);
+      color: var(--text-h);
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .mem-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 14, 13, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gold-dim);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .mem-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 8px 14px;
+      border: 1px solid var(--gold-mid);
+      border-radius: 2px;
+      transition: all .25s ease;
+    }
+    .mem-back:hover {
+      background: var(--gold);
+      color: var(--bg-base);
+      border-color: var(--gold);
+    }
+    .mem-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .mem-title-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+    .mem-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .mem-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      color: var(--text-h);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mem-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--bg-base);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 2px;
+      transition: all .25s ease;
+      border: 1px solid var(--gold);
+    }
+    .mem-download:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--gold-dim);
+    }
+    .mem-download svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── INTRO ── */
+    .mem-intro {
+      padding: 56px 28px 32px;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      border-bottom: 1px solid var(--gold-dim);
+    }
+    .mem-intro h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .mem-intro h1 em {
+      font-family: 'Cinzel', Georgia, serif;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+    .mem-intro .mem-sub {
+      font-style: italic;
+      color: var(--text-m);
+      font-size: 0.95rem;
+      max-width: 620px;
+      margin: 0 auto 26px;
+      line-height: 1.6;
+    }
+    .mem-meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-l);
+      font-weight: 500;
+    }
+    .mem-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .mem-meta span::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 7px;
+    }
+    .mem-meta span:first-child::before { display: none; }
+
+    /* ── VIEWER ── */
+    .mem-viewer-wrap {
+      flex: 1;
+      padding: 32px 24px 48px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mem-viewer {
+      position: relative;
+      width: 100%;
+      height: min(85vh, 1100px);
+      min-height: 560px;
+      background: var(--bg-panel);
+      border: 1px solid var(--gold-dim);
+      border-radius: 2px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,181,58,0.05);
+      overflow: hidden;
+    }
+
+    .mem-viewer iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* Mobile fallback overlay (shown only on small screens) */
+    .mem-mobile-fallback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 32px 22px;
+      text-align: center;
+    }
+    .mem-mobile-fallback svg {
+      width: 56px;
+      height: 56px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.3;
+      opacity: 0.9;
+    }
+    .mem-mobile-fallback h3 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .mem-mobile-fallback p {
+      font-size: 0.92rem;
+      color: var(--text-m);
+      line-height: 1.6;
+      max-width: 420px;
+    }
+    .mem-mobile-fallback .mem-download { margin-top: 4px; }
+
+    .mem-hint {
+      font-size: 11px;
+      color: var(--text-l);
+      text-align: center;
+      letter-spacing: 0.08em;
+      padding: 0 12px;
+    }
+    .mem-hint a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-dim);
+      transition: border-color .2s ease;
+    }
+    .mem-hint a:hover { border-bottom-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    .mem-footer {
+      padding: 28px 28px 32px;
+      border-top: 1px solid var(--gold-dim);
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-l);
+      font-weight: 500;
+    }
+    .mem-footer span { color: var(--gold); }
+
+    /* ── RESPONSIVE — TABLET ── */
+    @media (max-width: 1024px) {
+      .mem-header { padding: 12px 20px; }
+      .mem-title { font-size: 15px; }
+      .mem-intro { padding: 44px 22px 28px; }
+      .mem-viewer-wrap { padding: 24px 16px 36px; }
+      .mem-viewer { height: min(78vh, 900px); min-height: 500px; }
+    }
+
+    /* ── RESPONSIVE — MOBILE ── */
+    @media (max-width: 720px) {
+      .mem-header {
+        padding: 10px 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .mem-back { padding: 7px 11px; font-size: 10px; letter-spacing: 0.16em; }
+      .mem-back svg { width: 12px; height: 12px; }
+      .mem-title-wrap { order: 3; flex-basis: 100%; align-items: flex-start; }
+      .mem-eyebrow { font-size: 8px; letter-spacing: 0.3em; }
+      .mem-title { font-size: 14px; white-space: normal; }
+      .mem-download {
+        padding: 8px 14px;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+      }
+      .mem-download svg { width: 12px; height: 12px; }
+
+      .mem-intro { padding: 32px 18px 24px; }
+      .mem-intro h1 { font-size: 1.6rem; }
+      .mem-intro .mem-sub { font-size: 0.85rem; }
+      .mem-meta { font-size: 9px; letter-spacing: 0.2em; gap: 6px 16px; }
+
+      .mem-viewer-wrap { padding: 18px 12px 28px; gap: 12px; }
+
+      /* On mobile, swap iframe for the fallback (iOS Safari can't render PDF in iframe reliably) */
+      .mem-viewer { min-height: 0; height: auto; }
+      .mem-viewer iframe { display: none; }
+      .mem-mobile-fallback { display: flex; }
+
+      .mem-footer { padding: 22px 18px 26px; font-size: 9px; letter-spacing: 0.2em; }
+    }
+
+    /* Focus visibility */
+    a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="mem-header">
+    <a href="./index.html" class="mem-back" aria-label="Volver al portafolio">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      <span>Volver</span>
+    </a>
+
+    <div class="mem-title-wrap">
+      <span class="mem-eyebrow">TFG · DNAV · UCV 2026</span>
+      <span class="mem-title">Memoria — Ecos de Xàtiva</span>
+    </div>
+
+    <a href="./TFG_Ecos_de_Xativa_2026.pdf" class="mem-download" download aria-label="Descargar memoria en PDF">
+      <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+      <span>Descargar PDF</span>
+    </a>
+  </header>
+
+  <section class="mem-intro">
+    <h1>Memoria · <em>Ecos de Xàtiva</em></h1>
+    <p class="mem-sub">
+      Documento completo del Trabajo Fin de Grado: justificación, preproducción, concept art,
+      modelado 3D, diseño de niveles, diseño de sonido, programación, conclusiones y bibliografía.
+    </p>
+    <div class="mem-meta">
+      <span>124 páginas</span>
+      <span>Cormorant Garamond &amp; IBM Plex Sans</span>
+      <span>InDesign 2026</span>
+      <span>~46 MB</span>
+    </div>
+  </section>
+
+  <main class="mem-viewer-wrap">
+    <div class="mem-viewer">
+      <iframe
+        src="./TFG_Ecos_de_Xativa_2026.pdf#view=FitH&amp;toolbar=1&amp;navpanes=0"
+        title="Memoria del TFG Ecos de Xàtiva en PDF"
+        loading="lazy"
+      ></iframe>
+
+      <!-- Mobile fallback (iOS Safari does not render PDF in iframe reliably) -->
+      <div class="mem-mobile-fallback">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <path d="M14 2v6h6"/>
+          <path d="M9 13h6M9 17h6M9 9h1"/>
+        </svg>
+        <h3>Vista en móvil</h3>
+        <p>
+          El visor inline no se muestra correctamente en algunos navegadores móviles.
+          Pulsa el botón para abrir o descargar el PDF.
+        </p>
+        <a href="./TFG_Ecos_de_Xativa_2026.pdf" class="mem-download" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+          <span>Abrir PDF</span>
+        </a>
+      </div>
+    </div>
+
+    <p class="mem-hint">
+      Si el visor no carga, puedes
+      <a href="./TFG_Ecos_de_Xativa_2026.pdf" target="_blank" rel="noopener">abrir el PDF en una nueva pestaña</a>
+      o
+      <a href="./TFG_Ecos_de_Xativa_2026.pdf" download>descargarlo directamente</a>.
+    </p>
+  </main>
+
+  <footer class="mem-footer">
+    <span>Ecos de Xàtiva</span> &nbsp;·&nbsp; Hugo Ferrer Plaza &amp; Ignacio Carrascosa Brotons
+    &nbsp;·&nbsp; Tutor: Adrián Mantilla Pousa
+    &nbsp;·&nbsp; <span>UCV 2026</span>
+  </footer>
+
+</body>
+</html>
