@@ -375,6 +375,28 @@ html, body { width: 100%; height: 100%; background: #000; overflow: hidden; -web
   .et-logo { width: 56px; height: 56px; }
   .et-text { font-size: 10px; letter-spacing: 0.35em; }
 }
+
+/* Botón Play con animación de atención cuando se llega desde el modal */
+@keyframes pulseAttention {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(232,181,58,0.55),
+                0 0 24px rgba(232,181,58,0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(232,181,58,0),
+                0 0 36px rgba(232,181,58,0.6);
+  }
+}
+#play-btn.pulse-attention {
+  animation: pulseAttention 1.8s ease-in-out infinite;
+}
+#play-btn.pulse-attention::after {
+  content: '';
+  position: absolute; inset: -1px;
+  border: 1px solid var(--gold);
+  pointer-events: none;
+  animation: pulseAttention 1.8s ease-in-out infinite;
+}
 </style>
 </head>
 <body>
@@ -725,10 +747,42 @@ document.getElementById('play-btn').addEventListener('click', () => {
   startTrailer();
 });
 
-/* ── Autoplay si viene desde index.html ─────────────────────── */
+/* ── Llegada desde el modal de bienvenida (?auto=1) ──────────
+   IMPORTANTE: los navegadores móviles (Safari iOS, Chrome Android)
+   bloquean reproducir audio tras una navegación, aunque la página
+   anterior haya tenido un gesto del usuario. Por eso NO podemos
+   arrancar a ciegas. En su lugar:
+   1) Intentamos autoplay silencioso (lo permiten algunos navegadores
+      desktop), y si funciona, seguimos con el flujo automático.
+   2) Si falla (típico en móvil), dejamos la intro visible con el
+      botón Play destacado, para que el gesto del usuario active el
+      audio normalmente. */
 if (new URLSearchParams(location.search).get('auto') === '1') {
-  document.getElementById('intro').style.display = 'none';
-  startTrailer();
+  const playBtn = document.getElementById('play-btn');
+  const playLabel = playBtn ? playBtn.querySelector('span') : null;
+  if (playLabel) playLabel.textContent = '▶  Comenzar tráiler';
+  if (playBtn) {
+    playBtn.classList.add('pulse-attention');
+    setTimeout(() => { try { playBtn.focus(); } catch(e) {} }, 600);
+  }
+
+  /* Probar autoplay silencioso. Solo si el navegador lo permite,
+     entramos directos al tráiler con sonido. */
+  bgm.muted = true;
+  const tryAuto = bgm.play();
+  if (tryAuto && typeof tryAuto.then === 'function') {
+    tryAuto.then(() => {
+      /* Desktop con autoplay permitido — flujo automático */
+      bgm.pause();
+      bgm.currentTime = 0;
+      bgm.muted = false;
+      document.getElementById('intro').style.display = 'none';
+      startTrailer();
+    }).catch(() => {
+      /* Móvil o autoplay bloqueado — esperamos al clic */
+      bgm.muted = false;
+    });
+  }
 }
 </script>
 </body>
