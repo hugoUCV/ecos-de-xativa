@@ -3237,6 +3237,83 @@
       text-transform: uppercase;
       margin: 0 0 18px;
     }
+    /* QR + botones layout */
+    .descarga-qr-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: center;
+      margin: 40px 0 0;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+    .descarga-qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .descarga-qr-link {
+      display: block;
+      padding: 14px;
+      background: linear-gradient(180deg, #2A1C14 0%, #1F1410 100%);
+      border: 1px solid rgba(232,181,58,0.45);
+      border-radius: 4px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45),
+                  inset 0 1px 0 rgba(232,181,58,0.18);
+      transition: all .35s cubic-bezier(.16,1,.3,1);
+    }
+    .descarga-qr-link:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.6),
+                  0 0 0 1px rgba(232,181,58,0.3),
+                  0 0 30px rgba(232,181,58,0.18);
+    }
+    .descarga-qr-img {
+      display: block;
+      width: 180px;
+      height: 180px;
+    }
+    .descarga-qr-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .qr-label-eye {
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .qr-label-main {
+      font-size: 11px;
+      color: var(--text-m);
+      font-style: italic;
+    }
+    .descarga-actions-block {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    .descarga-actions-block .descarga-btns,
+    .descarga-actions-block .descarga-reqs {
+      margin: 0;
+    }
+    @media (max-width: 720px) {
+      .descarga-qr-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .descarga-actions-block {
+        align-items: center;
+      }
+      .descarga-qr-img { width: 200px; height: 200px; }
+    }
+
     .descarga-sub {
       font-size: 0.9rem;
       color: var(--text-m);
@@ -6109,33 +6186,56 @@
             sin necesidad de PC ni cables. Descarga el APK y entra al castillo.
           </p>
 
-          <div class="descarga-btns">
-            <a href="#" class="btn-quest" aria-label="Descargar APK para Meta Quest 3">
-              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Descargar APK
-            </a>
-            <a href="mailto:nhvrexperiences@gmail.com" class="btn btn-ghost" aria-label="Contactar para solicitar acceso">
-              Solicitar acceso
-            </a>
-          </div>
+          <!-- Grid: QR a la izquierda, botones+req a la derecha -->
+          <div class="descarga-qr-layout">
+            <div class="descarga-qr-block">
+              <a href="https://github.com/hugoUCV/ecos-de-xativa/releases/latest"
+                 target="_blank" rel="noopener"
+                 class="descarga-qr-link"
+                 aria-label="Escanea el código QR para descargar el APK">
+                <img src="./Imagenes/qr-descarga-quest.png"
+                     alt="Código QR de descarga"
+                     class="descarga-qr-img"
+                     loading="lazy" />
+              </a>
+              <div class="descarga-qr-label">
+                <span class="qr-label-eye">Escanea con tu móvil</span>
+                <span class="qr-label-main">o pulsa los botones</span>
+              </div>
+            </div>
 
-          <div class="descarga-reqs">
-            <span class="req-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;color:var(--gold);opacity:0.6">
-                <path d="M2 8 C2 4.7 4.7 2 8 2 C11.3 2 14 4.7 14 8 C14 11.3 11.3 14 8 14"/>
-                <path d="M8 14 C5 14 3 12 3 10 L8 10 Z" fill="rgba(232,181,58,0.2)" stroke="none"/>
-              </svg>
-              Meta Quest 3 / 3S
-            </span>
-            <span class="req-item">Developer Mode activado</span>
-            <span class="req-item">~350 MB</span>
-            <span class="req-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;color:var(--gold);opacity:0.6">
-                <circle cx="8" cy="8" r="6"/>
-                <path d="M8 5v3l2 2"/>
-              </svg>
-              Sin PC necesario
-            </span>
+            <div class="descarga-actions-block">
+              <div class="descarga-btns">
+                <a href="https://github.com/hugoUCV/ecos-de-xativa/releases/latest"
+                   target="_blank" rel="noopener"
+                   class="btn-quest" aria-label="Descargar APK para Meta Quest 3">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Descargar APK
+                </a>
+                <a href="mailto:nhvrexperiences@gmail.com" class="btn btn-ghost" aria-label="Contactar para solicitar acceso">
+                  Solicitar acceso
+                </a>
+              </div>
+
+              <div class="descarga-reqs">
+                <span class="req-item">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;color:var(--gold);opacity:0.6">
+                    <path d="M2 8 C2 4.7 4.7 2 8 2 C11.3 2 14 4.7 14 8 C14 11.3 11.3 14 8 14"/>
+                    <path d="M8 14 C5 14 3 12 3 10 L8 10 Z" fill="rgba(232,181,58,0.2)" stroke="none"/>
+                  </svg>
+                  Meta Quest 3 / 3S
+                </span>
+                <span class="req-item">Developer Mode activado</span>
+                <span class="req-item">~1.1 GB</span>
+                <span class="req-item">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;color:var(--gold);opacity:0.6">
+                    <circle cx="8" cy="8" r="6"/>
+                    <path d="M8 5v3l2 2"/>
+                  </svg>
+                  Sin PC necesario
+                </span>
+              </div>
+            </div>
           </div>
 
         </div>
