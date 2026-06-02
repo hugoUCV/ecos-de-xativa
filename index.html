@@ -3828,27 +3828,45 @@
       border-color: rgba(232,181,58,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.4);
       transform: translateY(-3px);
     }
-    .wf-img-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; }
-    .wf-img-render, .wf-img-wire {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-      transition: opacity 0.5s var(--ease);
+    /* Slider render/wireframe */
+    .rw-slider-wrap {
+      position: relative; aspect-ratio: 4/3; overflow: hidden;
+      cursor: ew-resize; border-radius: 4px;
+      user-select: none; -webkit-user-select: none;
     }
-    .wf-img-wire { opacity: 0; }
-    .wf-card.is-wire .wf-img-render { opacity: 0; }
-    .wf-card.is-wire .wf-img-wire   { opacity: 1; }
-    .wf-badge {
-      position: absolute; top: 9px; left: 9px;
-      padding: 3px 8px;
-      background: rgba(10,7,3,0.82); border: 1px solid rgba(232,181,58,0.25);
-      font-family: var(--font-b); font-size: 0.57rem; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
-      border-radius: 2px; z-index: 5; pointer-events: none;
-      transition: all 0.35s var(--ease);
+    .rw-slider-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; pointer-events: none;
     }
-    .wf-card.is-wire .wf-badge {
-      background: rgba(185,36,44,0.88); border-color: rgba(225,88,98,0.4); color: var(--text-h);
-      content: 'Wireframe';
+    .rw-slider-img.wf { clip-path: inset(0 50% 0 0); }
+    .rw-slider-line {
+      position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+      background: var(--gold); z-index: 5; transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(232,181,58,0.6);
     }
+    .rw-slider-handle {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 32px; height: 32px;
+      background: var(--gold); border-radius: 50%; z-index: 6;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.45);
+    }
+    .rw-slider-handle::before, .rw-slider-handle::after {
+      content: ''; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+    }
+    .rw-slider-handle::before { border-right: 7px solid var(--bg-base); margin-right: 2px; }
+    .rw-slider-handle::after  { border-left:  7px solid var(--bg-base); margin-left: 2px; }
+    .rw-label {
+      position: absolute; top: 8px; z-index: 4;
+      font-size: 0.58rem; font-family: var(--font-b);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; pointer-events: none;
+    }
+    .rw-label-r { left: 8px;  background: rgba(0,0,0,0.65); color: var(--gold); }
+    .rw-label-w { right: 8px; background: rgba(0,0,0,0.65); color: rgba(255,255,255,0.75); }
     .wf-info { padding: 13px 15px 15px; }
     .wf-name {
       font-family: var(--font-d); font-size: 0.74rem; font-weight: 600;
@@ -5422,17 +5440,20 @@
           <h2 id="wireframes-heading" class="section-heading">Del polígono a la piedra</h2>
           <p class="wf-intro">
             Cada módulo nace como malla de polígonos y llega a ser piedra, madera o hierro.
-            <strong>Haz clic en cualquier pieza</strong> para alternar entre el wireframe y el render final.
+            <strong>Arrastra el slider</strong> sobre cualquier pieza para comparar wireframe y render final.
           </p>
         </div>
 
         <div class="wf-grid" id="wf-grid">
 
-          <div class="wf-card reveal" role="button" tabindex="0" aria-label="Alternar wireframe de Bóveda">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/Boveda.png" alt="Bóveda — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/BovedaWF.png" alt="Bóveda — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" aria-label="Slider Bóveda">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/Boveda.png" alt="Bóveda — render final" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/BovedaWF.png" alt="Bóveda — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Bóveda</p>
@@ -5440,11 +5461,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="1" role="button" tabindex="0" aria-label="Alternar wireframe de Columnas">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/Columnas.png" alt="Columnas — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/ColumnasWF.png" alt="Columnas — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="1" aria-label="Slider Columnas">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/Columnas.png" alt="Columnas — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/ColumnasWF.png" alt="Columnas — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Columnas</p>
@@ -5452,11 +5476,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="2" role="button" tabindex="0" aria-label="Alternar wireframe de Escaleras">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/Escaleras.png" alt="Escaleras — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/EscalerasWF.png" alt="Escaleras — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="2" aria-label="Slider Escaleras">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/Escaleras.png" alt="Escaleras — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/EscalerasWF.png" alt="Escaleras — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Escaleras</p>
@@ -5464,11 +5491,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="3" role="button" tabindex="0" aria-label="Alternar wireframe de Antorcha">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/AntorchaMano.png" alt="Antorcha — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/AntorchaManoWF.png" alt="Antorcha — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="3" aria-label="Slider Antorcha">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/AntorchaMano.png" alt="Antorcha — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/AntorchaManoWF.png" alt="Antorcha — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Antorcha</p>
@@ -5476,11 +5506,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="1" role="button" tabindex="0" aria-label="Alternar wireframe de Pared con ventana">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/ParedVentana.png" alt="Pared con ventana — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/ParedVentanaWF.png" alt="Pared con ventana — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="1" aria-label="Slider Pared con ventana">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/ParedVentana.png" alt="Pared con ventana — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/ParedVentanaWF.png" alt="Pared con ventana — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Pared con Ventana</p>
@@ -5488,11 +5521,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="2" role="button" tabindex="0" aria-label="Alternar wireframe de Pared con puerta">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/ParedPuerta.png" alt="Pared con puerta — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/ParedPuertaWF.png" alt="Pared con puerta — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="2" aria-label="Slider Pared con puerta">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/ParedPuerta.png" alt="Pared con puerta — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/ParedPuertaWF.png" alt="Pared con puerta — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Pared con Puerta</p>
@@ -5500,11 +5536,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="3" role="button" tabindex="0" aria-label="Alternar wireframe de Ladrillo">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/LadrillosPared.png" alt="Ladrillo de pared — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/LadrillosParedWF.png" alt="Ladrillo de pared — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="3" aria-label="Slider Ladrillo">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/LadrillosPared.png" alt="Ladrillo — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/LadrillosParedWF.png" alt="Ladrillo — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Ladrillo de Pared</p>
@@ -5512,11 +5551,14 @@
             </div>
           </div>
 
-          <div class="wf-card reveal" data-delay="1" role="button" tabindex="0" aria-label="Alternar wireframe de Suelo de piedras">
-            <div class="wf-img-wrap">
-              <img class="wf-img-render" src="./Imagenes/SueloPiedras.png" alt="Suelo de piedras — render final" loading="lazy" />
-              <img class="wf-img-wire"   src="./Imagenes/SueloPiedrasWF.png" alt="Suelo de piedras — wireframe" loading="lazy" />
-              <div class="wf-badge">RENDER</div>
+          <div class="wf-card reveal" data-delay="1" aria-label="Slider Suelo">
+            <div class="rw-slider-wrap" data-rw>
+              <img class="rw-slider-img" src="./Imagenes/SueloPiedras.png" alt="Suelo — render" loading="lazy" />
+              <img class="rw-slider-img wf" src="./Imagenes/SueloPiedrasWF.png" alt="Suelo — wireframe" loading="lazy" />
+              <div class="rw-slider-line"></div>
+              <div class="rw-slider-handle"></div>
+              <span class="rw-label rw-label-r">Render</span>
+              <span class="rw-label rw-label-w">Wireframe</span>
             </div>
             <div class="wf-info">
               <p class="wf-name">Suelo de Piedras</p>
@@ -5527,7 +5569,7 @@
         </div>
 
         <p class="wf-hint reveal">
-          <strong>Click</strong> en cada pieza para ver el wireframe de malla —
+          Arrastra la barra central de cada pieza para revelar el wireframe —
           así pasan de <strong>geometría</strong> a <strong>materiales PBR</strong>
         </p>
 
@@ -8398,6 +8440,44 @@
 
   <!-- Chatbot local "Pregúntale a NH" — sin API externa -->
   <script src="./chatbot.js" defer></script>
+
+  <!-- Render / Wireframe sliders -->
+  <script>
+  (function() {
+    function initRWSlider(wrap) {
+      const wfImg  = wrap.querySelector('.rw-slider-img.wf');
+      const line   = wrap.querySelector('.rw-slider-line');
+      const handle = wrap.querySelector('.rw-slider-handle');
+      if (!wfImg || !line || !handle) return;
+      let dragging = false;
+
+      function setPos(pct) {
+        pct = Math.max(2, Math.min(98, pct));
+        wfImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        line.style.left      = pct + '%';
+        handle.style.left    = pct + '%';
+      }
+
+      function getRelX(e) {
+        const r = wrap.getBoundingClientRect();
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+        return (x / r.width) * 100;
+      }
+
+      setPos(50);
+
+      wrap.addEventListener('mousedown',  function(e) { dragging = true; setPos(getRelX(e)); e.preventDefault(); });
+      wrap.addEventListener('touchstart', function(e) { dragging = true; setPos(getRelX(e)); }, { passive: true });
+
+      document.addEventListener('mousemove',  function(e) { if (dragging) setPos(getRelX(e)); });
+      document.addEventListener('touchmove',  function(e) { if (dragging) setPos(getRelX(e)); }, { passive: true });
+      document.addEventListener('mouseup',    function()  { dragging = false; });
+      document.addEventListener('touchend',   function()  { dragging = false; });
+    }
+
+    document.querySelectorAll('[data-rw]').forEach(initRWSlider);
+  })();
+  </script>
 
 </body>
 </html>

@@ -459,7 +459,50 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
   .g3{grid-template-columns:1fr 1fr}
   .g4,.g5{grid-template-columns:repeat(2,1fr)}
 }
-  </style>
+
+/* ── VR THEORY slide ── */
+.vr-theory-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;flex:1}
+.vr-theory-col{display:flex;flex-direction:column;gap:14px}
+.vr-theory-card{display:flex;gap:16px;align-items:flex-start;background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);padding:16px 18px;transition:border-color var(--dur) var(--ease)}
+.vr-theory-card:hover{border-color:var(--goldd)}
+.vr-theory-num{font-family:var(--fc);font-size:1.4rem;font-weight:700;color:var(--crim);min-width:28px;line-height:1}
+.vr-theory-label{font-family:var(--fd);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.vr-theory-body{font-size:.82rem;color:var(--tb);line-height:1.6;margin:0}
+.vr-theory-body em{color:var(--gold);font-style:normal}
+.vr-theory-head{font-family:var(--fd);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crim);padding-bottom:8px;border-bottom:1px solid var(--r2);margin-bottom:4px}
+.vr-impl-item{display:flex;gap:13px;align-items:flex-start;padding:12px 16px;background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl)}
+.vr-impl-item--highlight{border-color:rgba(232,181,58,.3);background:rgba(232,181,58,.04)}
+.vr-impl-icon{font-size:1.3rem;line-height:1;margin-top:2px;flex-shrink:0}
+.vr-impl-label{font-family:var(--fd);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.vr-impl-body{font-size:.8rem;color:var(--tb);line-height:1.55;margin:0}
+.vr-impl-body em{color:var(--gold);font-style:normal}
+@media(max-width:1024px){.vr-theory-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.vr-theory-card{flex-direction:column;gap:8px}}
+
+/* ── NOPE slide (lo que no hicimos) ── */
+.nope-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;flex:1}
+.nope-card{background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);padding:14px 16px;display:flex;flex-direction:column;gap:7px;transition:border-color var(--dur) var(--ease)}
+.nope-card:hover{border-color:rgba(185,36,44,.45)}
+.nope-label{font-family:var(--fd);font-size:.78rem;font-weight:500;letter-spacing:.08em;color:var(--th);text-decoration:line-through;text-decoration-color:var(--crim);text-decoration-thickness:2px}
+.nope-reason{font-size:.77rem;color:var(--tb);line-height:1.55;flex:1}
+.nope-tag{display:inline-block;font-family:var(--fb);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--crim);border:1px solid rgba(185,36,44,.35);padding:2px 8px;border-radius:2px;margin-top:2px;align-self:flex-start}
+@media(max-width:1024px){.nope-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.nope-grid{grid-template-columns:1fr}}
+
+/* ── SLIDER RENDER/WIREFRAME ── */
+.rw-slider-wrap{position:relative;border-radius:var(--radl);overflow:hidden;cursor:ew-resize;border:1px solid var(--r2);aspect-ratio:16/9;user-select:none;-webkit-user-select:none}
+.rw-slider-wrap:hover{border-color:var(--goldd)}
+.rw-slider-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.rw-slider-img.wf{clip-path:inset(0 50% 0 0);transition:clip-path 0s}
+.rw-slider-line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--gold);z-index:5;transform:translateX(-50%);pointer-events:none;box-shadow:0 0 12px rgba(232,181,58,.7)}
+.rw-slider-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:var(--gold);border-radius:50%;z-index:6;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.45)}
+.rw-slider-handle::before,.rw-slider-handle::after{content:'';border-top:6px solid transparent;border-bottom:6px solid transparent}
+.rw-slider-handle::before{border-right:8px solid var(--bg);margin-right:2px}
+.rw-slider-handle::after{border-left:8px solid var(--bg);margin-left:2px}
+.rw-label{position:absolute;top:10px;z-index:4;font-family:var(--fb);font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border-radius:2px;pointer-events:none}
+.rw-label-r{left:10px;background:rgba(0,0,0,.65);color:var(--gold)}
+.rw-label-w{right:10px;background:rgba(0,0,0,.65);color:rgba(255,255,255,.7)}
+</style>
 </head>
 <body>
 
@@ -469,16 +512,18 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <nav id="ndots">
   <button class="ndot on" data-i="0" data-label="Portada"></button>
   <button class="ndot" data-i="1" data-label="La Propuesta"></button>
-  <button class="ndot" data-i="2" data-label="Análisis DAFO"></button>
-  <button class="ndot" data-i="3" data-label="Stack Técnico"></button>
-  <button class="ndot" data-i="4" data-label="Dirección de Arte"></button>
-  <button class="ndot" data-i="5" data-label="Los Cinco Niveles"></button>
-  <button class="ndot" data-i="6" data-label="Assets 3D"></button>
-  <button class="ndot" data-i="7" data-label="7 Sistemas"></button>
-  <button class="ndot" data-i="8" data-label="Diseño de Sonido"></button>
-  <button class="ndot" data-i="9" data-label="Desafíos Técnicos"></button>
-  <button class="ndot" data-i="10" data-label="Conclusiones"></button>
-  <button class="ndot" data-i="11" data-label="Créditos"></button>
+  <button class="ndot" data-i="2" data-label="Por qué VR"></button>
+  <button class="ndot" data-i="3" data-label="Lo que no hicimos"></button>
+  <button class="ndot" data-i="4" data-label="Análisis DAFO"></button>
+  <button class="ndot" data-i="5" data-label="Stack Técnico"></button>
+  <button class="ndot" data-i="6" data-label="Dirección de Arte"></button>
+  <button class="ndot" data-i="7" data-label="Los Cinco Niveles"></button>
+  <button class="ndot" data-i="8" data-label="Assets 3D"></button>
+  <button class="ndot" data-i="9" data-label="7 Sistemas"></button>
+  <button class="ndot" data-i="10" data-label="Diseño de Sonido"></button>
+  <button class="ndot" data-i="11" data-label="Desafíos Técnicos"></button>
+  <button class="ndot" data-i="12" data-label="Conclusiones"></button>
+  <button class="ndot" data-i="13" data-label="Créditos"></button>
 </nav>
 <div id="counter"><b id="cn">01</b> / 12</div>
 <button id="np" class="narrow" aria-label="Anterior">&#8593;</button>
@@ -513,7 +558,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 ================================================================ -->
 <section id="s02" class="slide" data-i="1">
   <div class="slide-inner">
-    <div class="snum rv">02 / 12</div>
+    <div class="snum rv">02 / 14</div>
     <div class="stag rv d1">La Propuesta</div>
     <h2 class="sh rv d2">La vitrina se <span style="color:var(--crim)">rompe</span></h2>
     <div class="div rv d2"></div>
@@ -544,11 +589,159 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 </section>
 
 <!-- ================================================================
+     S02b — POR QUÉ VR: TEORÍA, PSICOLOGÍA Y JUSTIFICACIÓN
+================================================================ -->
+<section id="s02b" class="slide" data-i="2">
+  <div class="slide-inner">
+    <div class="snum rv">03 / 14</div>
+    <div class="stag rv d1">Fundamento Científico</div>
+    <h2 class="sh rv d2">¿Por qué <span style="color:var(--crim)">funciona</span> la realidad virtual?</h2>
+    <div class="div rv d2"></div>
+
+    <div class="vr-theory-grid rv d3">
+
+      <!-- Columna izquierda: las tres teorías -->
+      <div class="vr-theory-col">
+
+        <div class="vr-theory-card">
+          <div class="vr-theory-num">01</div>
+          <div>
+            <div class="vr-theory-label">Presencia e Ilusión de Lugar</div>
+            <p class="vr-theory-body">El cerebro acepta el entorno virtual como real cuando el estímulo visual, sonoro y físico son coherentes entre sí. <em>(Slater, 2009)</em> La VR no «engaña» al usuario: le ofrece un entorno que su sistema perceptivo puede habitar.</p>
+          </div>
+        </div>
+
+        <div class="vr-theory-card">
+          <div class="vr-theory-num">02</div>
+          <div>
+            <div class="vr-theory-label">Cognición Corporizada</div>
+            <p class="vr-theory-body">El conocimiento se consolida más profundamente cuando el cuerpo participa en el proceso. <em>(Wilson, 2002; Zhao, 2025)</em> Tensar el arco con las propias manos genera una comprensión del arma que ninguna cartel informativo puede replicar.</p>
+          </div>
+        </div>
+
+        <div class="vr-theory-card">
+          <div class="vr-theory-num">03</div>
+          <div>
+            <div class="vr-theory-label">Embodiment y Agencia</div>
+            <p class="vr-theory-body">La sensación de que las manos virtuales son las manos propias del usuario <em>(Kilteni et al., 2012)</em> activa el mismo sistema de memoria episódica que los recuerdos físicos reales, generando un recuerdo más vívido y duradero.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna derecha: implicaciones concretas -->
+      <div class="vr-theory-col">
+
+        <div class="vr-theory-head">¿Qué implica esto para el patrimonio?</div>
+
+        <div class="vr-impl-item">
+          <span class="vr-impl-icon">🏛️</span>
+          <div>
+            <div class="vr-impl-label">Del objeto al sujeto</div>
+            <p class="vr-impl-body">El visitante ya no <em>ve</em> la daga nazarí; la <em>sostiene</em>. El cambio de rol activa procesos cognitivos que la visita pasiva nunca desencadena.</p>
+          </div>
+        </div>
+
+        <div class="vr-impl-item">
+          <span class="vr-impl-icon">🧠</span>
+          <div>
+            <div class="vr-impl-label">Retención significativamente mayor</div>
+            <p class="vr-impl-body">Estudios sobre VR en entornos patrimoniales demuestran que la interacción directa con recreaciones históricas aumenta la implicación del visitante y la retención de información. <em>(Liu et al., 2021)</em></p>
+          </div>
+        </div>
+
+        <div class="vr-impl-item">
+          <span class="vr-impl-icon">⚡</span>
+          <div>
+            <div class="vr-impl-label">El juego como vehículo pedagógico</div>
+            <p class="vr-impl-body">Las mecánicas de videojuego —objetivo claro, feedback inmediato, progresión— son el sistema de aprendizaje más eficiente que existe para cualquier tipo de usuario, sin importar su edad o formación. <em>(Gee, 2003)</em></p>
+          </div>
+        </div>
+
+        <div class="vr-impl-item vr-impl-item--highlight">
+          <span class="vr-impl-icon">🎯</span>
+          <div>
+            <div class="vr-impl-label">Ecos de Xàtiva aplica todo esto</div>
+            <p class="vr-impl-body">Cada decisión de diseño —desde la progresión de espacios hasta el feedback háptico del arco— tiene respaldo en psicología cognitiva y diseño de experiencias inmersivas, no solo en criterio artístico.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     S02c — LO QUE NO HICIMOS (Y POR QUÉ)
+================================================================ -->
+<section id="s02c" class="slide" data-i="3">
+  <div class="slide-inner">
+    <div class="snum rv">04 / 14</div>
+    <div class="stag rv d1">Decisiones Conscientes</div>
+    <h2 class="sh rv d2">Lo que <span style="color:var(--crim)">no</span> hicimos — y por qué</h2>
+    <div class="div rv d2"></div>
+    <p class="rv d3" style="font-size:.82rem;color:var(--tm);max-width:700px;margin-bottom:22px">Cada característica descartada fue una decisión fundamentada en tiempo, rendimiento, alcance o viabilidad real del proyecto.</p>
+
+    <div class="nope-grid rv d3">
+
+      <div class="nope-card">
+        <div class="nope-label">PCVR / Cable</div>
+        <div class="nope-reason">Un museo no puede depender de un PC de 2.000€ por unidad VR. El standalone es la única opción con viabilidad operativa real en un entorno cultural.</div>
+        <div class="nope-tag">Viabilidad</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Lumen (iluminación dinámica)</div>
+        <div class="nope-reason">Lumen consume GPU en tiempo real. En Meta Quest 3 standalone provoca caídas por debajo de 72 fps, umbral de VR sickness. Usamos lightmaps precomputados: misma calidad visual, coste cero en runtime.</div>
+        <div class="nope-tag">Rendimiento</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Nanite (geometría virtual)</div>
+        <div class="nope-reason">Nanite no es compatible con el pipeline de renderizado de Android / Meta Quest 3. El arte modular optimizado cumple los mismos objetivos sin dependencia de la feature.</div>
+        <div class="nope-tag">Compatibilidad</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Cuerpo completo con IK</div>
+        <div class="nope-reason">Calcular cinemática inversa desde solo tres puntos de tracking (visor + dos mandos) genera posturas antinaturales que rompen la inmersión más que las manos flotantes. Decisión de UX, no de coste.</div>
+        <div class="nope-tag">UX</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Multijugador</div>
+        <div class="nope-reason">La sincronización en red de físicas complejas (corte procedural, Chaos) en standalone es un problema de ingeniería de semanas. El foco es la profundidad de la experiencia individual, no la escala social.</div>
+        <div class="nope-tag">Alcance</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Sistema de guardado</div>
+        <div class="nope-reason">La experiencia dura 15-20 minutos y está pensada como visita continua, no como sesión interrumpible. Añadir guardado habría requerido diseñar un sistema de estado global que no aporta valor en ese rango de duración.</div>
+        <div class="nope-tag">Alcance</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Meta Quest 2 / Quest 1</div>
+        <div class="nope-reason">Chaos Destruction y el corte procedural C++ requieren la capacidad de cómputo del Snapdragon XR2 Gen 2 (Quest 3). Mantener Quest 2 habría obligado a eliminar los dos sistemas técnicamente más relevantes del proyecto.</div>
+        <div class="nope-tag">Rendimiento</div>
+      </div>
+
+      <div class="nope-card">
+        <div class="nope-label">Snap-grab en armas</div>
+        <div class="nope-reason">El agarre asistido fija las armas en postura predefinida y elimina la sensación de peso y resistencia real. Decidimos priorizar embodiment sobre accesibilidad para potenciar la experiencia.</div>
+        <div class="nope-tag">Diseño</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
      S03 — DAFO
 ================================================================ -->
-<section id="s03" class="slide" data-i="2">
+<section id="s03" class="slide" data-i="4">
   <div class="slide-inner">
-    <div class="snum rv">03 / 12</div>
+    <div class="snum rv">05 / 14</div>
     <div class="stag rv d1">Análisis Estratégico</div>
     <h2 class="sh rv d2">Posicionamiento del proyecto</h2>
     <div class="div rv d2"></div>
@@ -587,9 +780,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S04 — STACK TÉCNICO
 ================================================================ -->
-<section id="s04" class="slide" data-i="3">
+<section id="s04" class="slide" data-i="5">
   <div class="slide-inner">
-    <div class="snum rv">04 / 12</div>
+    <div class="snum rv">06 / 14</div>
     <div class="stag rv d1">Sistemas de Interacción</div>
     <h2 class="sh rv d2">7 mecánicas originales para VR</h2>
     <div class="div rv d2"></div>
@@ -694,9 +887,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S05 — DIRECCIÓN DE ARTE
 ================================================================ -->
-<section id="s05" class="slide" data-i="4">
+<section id="s05" class="slide" data-i="6">
   <div class="slide-inner">
-    <div class="snum rv">05 / 12</div>
+    <div class="snum rv">07 / 14</div>
     <div class="stag rv d1">Dirección de Arte</div>
     <h2 class="sh rv d2">Estilización sobre el hiperrealismo</h2>
     <div class="div rv d2"></div>
@@ -740,23 +933,39 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         </div>
       </div>
       <div class="rvr d4">
-        <p style="font-family:var(--fd);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Render final · hover para wireframe</p>
+        <p style="font-family:var(--fd);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Arrastra el slider para comparar render / wireframe</p>
         <div class="wf-grid">
-          <div class="wf-pair">
-            <img class="rnd" src="./Imagenes/Boveda.png" alt="Bóveda render"><img class="wf" src="./Imagenes/BovedaWF.png" alt="Bóveda wireframe">
-            <span class="wf-tip">hover — wireframe</span>
+          <div class="rw-slider-wrap" data-rw>
+            <img class="rw-slider-img" src="./Imagenes/Boveda.png" alt="Bóveda render">
+            <img class="rw-slider-img wf" src="./Imagenes/BovedaWF.png" alt="Bóveda wireframe">
+            <div class="rw-slider-line"></div>
+            <div class="rw-slider-handle"></div>
+            <span class="rw-label rw-label-r">Render</span>
+            <span class="rw-label rw-label-w">Wireframe</span>
           </div>
-          <div class="wf-pair">
-            <img class="rnd" src="./Imagenes/Columnas.png" alt="Columnas render"><img class="wf" src="./Imagenes/ColumnasWF.png" alt="Columnas wireframe">
-            <span class="wf-tip">hover — wireframe</span>
+          <div class="rw-slider-wrap" data-rw>
+            <img class="rw-slider-img" src="./Imagenes/Columnas.png" alt="Columnas render">
+            <img class="rw-slider-img wf" src="./Imagenes/ColumnasWF.png" alt="Columnas wireframe">
+            <div class="rw-slider-line"></div>
+            <div class="rw-slider-handle"></div>
+            <span class="rw-label rw-label-r">Render</span>
+            <span class="rw-label rw-label-w">Wireframe</span>
           </div>
-          <div class="wf-pair">
-            <img class="rnd" src="./Imagenes/Escaleras.png" alt="Escaleras render"><img class="wf" src="./Imagenes/EscalerasWF.png" alt="Escaleras wireframe">
-            <span class="wf-tip">hover — wireframe</span>
+          <div class="rw-slider-wrap" data-rw>
+            <img class="rw-slider-img" src="./Imagenes/Escaleras.png" alt="Escaleras render">
+            <img class="rw-slider-img wf" src="./Imagenes/EscalerasWF.png" alt="Escaleras wireframe">
+            <div class="rw-slider-line"></div>
+            <div class="rw-slider-handle"></div>
+            <span class="rw-label rw-label-r">Render</span>
+            <span class="rw-label rw-label-w">Wireframe</span>
           </div>
-          <div class="wf-pair">
-            <img class="rnd" src="./Imagenes/ParedLisa.png" alt="Pared lisa render"><img class="wf" src="./Imagenes/ParedLisaWF.png" alt="Pared lisa wireframe">
-            <span class="wf-tip">hover — wireframe</span>
+          <div class="rw-slider-wrap" data-rw>
+            <img class="rw-slider-img" src="./Imagenes/ParedLisa.png" alt="Pared lisa render">
+            <img class="rw-slider-img wf" src="./Imagenes/ParedLisaWF.png" alt="Pared lisa wireframe">
+            <div class="rw-slider-line"></div>
+            <div class="rw-slider-handle"></div>
+            <span class="rw-label rw-label-r">Render</span>
+            <span class="rw-label rw-label-w">Wireframe</span>
           </div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);overflow:hidden;margin-top:12px">
@@ -770,9 +979,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S06 — LOS CINCO NIVELES
 ================================================================ -->
-<section id="s06" class="slide" data-i="5">
+<section id="s06" class="slide" data-i="7">
   <div class="slide-inner">
-    <div class="snum rv">06 / 12</div>
+    <div class="snum rv">08 / 14</div>
     <div class="stag rv d1">Diseño de Niveles</div>
     <h2 class="sh rv d2">Los cuatro espacios del castillo</h2>
     <div class="div rv d2"></div>
@@ -829,9 +1038,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S07 — ASSETS HISTÓRICOS 3D
 ================================================================ -->
-<section id="s07" class="slide" data-i="6">
+<section id="s07" class="slide" data-i="8">
   <div class="slide-inner">
-    <div class="snum rv">07 / 12</div>
+    <div class="snum rv">09 / 14</div>
     <div class="stag rv d1">Assets Históricos</div>
     <h2 class="sh rv d2">Colección 3D interactiva</h2>
     <div class="div rv d2"></div>
@@ -865,9 +1074,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S08 — PROGRAMACIÓN: 7 SISTEMAS
 ================================================================ -->
-<section id="s08" class="slide" data-i="7">
+<section id="s08" class="slide" data-i="9">
   <div class="slide-inner">
-    <div class="snum rv">08 / 12</div>
+    <div class="snum rv">10 / 14</div>
     <div class="stag rv d1">Programación</div>
     <h2 class="sh rv d2">Siete sistemas de interacción</h2>
     <div class="div rv d2"></div>
@@ -887,9 +1096,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S09 — DISEÑO DE SONIDO
 ================================================================ -->
-<section id="s09" class="slide" data-i="8">
+<section id="s09" class="slide" data-i="10">
   <div class="slide-inner">
-    <div class="snum rv">09 / 12</div>
+    <div class="snum rv">11 / 14</div>
     <div class="stag rv d1">Diseño de Sonido</div>
     <h2 class="sh rv d2">Arquitectura sonora del castillo</h2>
     <div class="div rv d2"></div>
@@ -942,9 +1151,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S10 — DESAFÍOS TÉCNICOS
 ================================================================ -->
-<section id="s10" class="slide" data-i="9">
+<section id="s10" class="slide" data-i="11">
   <div class="slide-inner">
-    <div class="snum rv">10 / 12</div>
+    <div class="snum rv">12 / 14</div>
     <div class="stag rv d1">Desafíos Técnicos</div>
     <h2 class="sh rv d2">Problemas reales, soluciones reales</h2>
     <div class="div rv d2"></div>
@@ -1013,9 +1222,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S11 — CONCLUSIONES
 ================================================================ -->
-<section id="s11" class="slide" data-i="10">
+<section id="s11" class="slide" data-i="12">
   <div class="slide-inner">
-    <div class="snum rv">11 / 12</div>
+    <div class="snum rv">13 / 14</div>
     <div class="stag rv d1">Conclusiones</div>
     <h2 class="sh rv d2">Lo aprendido. Lo que viene.</h2>
     <div class="div rv d2"></div>
@@ -1046,7 +1255,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S12 — CRÉDITOS
 ================================================================ -->
-<section id="s12" class="slide" data-i="11">
+<section id="s12" class="slide" data-i="13">
   <div class="s12-wrap">
     <div class="s12-rule rv"></div>
     <div class="stag rv d1">Fin de la presentación</div>
@@ -1090,7 +1299,7 @@ function goTo(idx) {
     cur = idx;
     updateUI(idx);
     triggerReveals(slides[idx]);
-    if (idx === 6) initModels();
+    if (idx === 8) initModels();
     overlay.classList.remove('show');
     setTimeout(() => { busy = false; }, 320);
   }, 280);
@@ -1322,9 +1531,43 @@ function initModels() {
     s01.style.setProperty('--py', dy + 'px');
   });
 })();
+
+/* ── RENDER / WIREFRAME SLIDER ── */
+(function() {
+  function initSlider(wrap) {
+    const wfImg  = wrap.querySelector('.rw-slider-img.wf');
+    const line   = wrap.querySelector('.rw-slider-line');
+    const handle = wrap.querySelector('.rw-slider-handle');
+    let dragging = false;
+
+    function setPos(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      wfImg.style.clipPath  = `inset(0 ${100 - pct}% 0 0)`;
+      line.style.left       = pct + '%';
+      handle.style.left     = pct + '%';
+    }
+
+    function getRelX(e) {
+      const r = wrap.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      return (x / r.width) * 100;
+    }
+
+    setPos(50); // Arranca al 50%
+
+    wrap.addEventListener('mousedown',  e => { dragging = true; setPos(getRelX(e)); });
+    wrap.addEventListener('touchstart', e => { dragging = true; setPos(getRelX(e)); }, { passive: true });
+
+    window.addEventListener('mousemove',  e => { if (dragging) setPos(getRelX(e)); });
+    window.addEventListener('touchmove',  e => { if (dragging) setPos(getRelX(e)); }, { passive: true });
+
+    window.addEventListener('mouseup',   () => { dragging = false; });
+    window.addEventListener('touchend',  () => { dragging = false; });
+  }
+
+  document.querySelectorAll('[data-rw]').forEach(initSlider);
+})();
 </script>
 
-<!-- Chatbot local "Pregúntale a NH" -->
-<script src="./chatbot.js" defer></script>
 </body>
 </html>
