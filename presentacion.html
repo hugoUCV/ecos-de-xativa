@@ -502,6 +502,111 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 .rw-label{position:absolute;top:10px;z-index:4;font-family:var(--fb);font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:2px 9px;border-radius:2px;pointer-events:none}
 .rw-label-r{left:10px;background:rgba(0,0,0,.65);color:var(--gold)}
 .rw-label-w{right:10px;background:rgba(0,0,0,.65);color:rgba(255,255,255,.7)}
+
+/* ── S02 PILLS ── */
+.s02-pills{display:flex;gap:0;background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);overflow:hidden;margin-top:4px}
+.spill{flex:1;padding:13px 14px;border-right:1px solid var(--r2);text-align:center;transition:background var(--dur) var(--ease)}
+.spill:last-child{border-right:none}
+.spill:hover{background:rgba(255,255,255,.025)}
+.spill-n{display:block;font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--gold);line-height:1}
+.spill-l{display:block;font-size:.66rem;letter-spacing:.07em;color:var(--tm);margin-top:4px}
+@media(max-width:640px){.s02-pills{flex-direction:column}.spill{border-right:none;border-bottom:1px solid var(--r2)}.spill:last-child{border-bottom:none}}
+
+/* ── BC SLIDE (combined VR + nope) ── */
+.bc-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.bc-col{display:flex;flex-direction:column;gap:8px}
+.bc-head{font-family:var(--fd);font-size:.63rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--crim);padding-bottom:8px;border-bottom:1px solid var(--r2);margin-bottom:2px}
+.bc-acc{display:flex;flex-direction:column;gap:4px}
+.bc-item{background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);overflow:hidden;transition:border-color var(--dur) var(--ease)}
+.bc-item.bc-open{border-color:rgba(232,181,58,.3)}
+.bc-title{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font-family:var(--fd);font-size:.78rem;font-weight:600;letter-spacing:.03em;color:var(--th);cursor:pointer;user-select:none;gap:10px}
+.bc-title:hover{color:var(--gold)}
+.bc-arr{font-family:var(--fb);font-size:.85rem;color:var(--gold);transition:transform var(--dur) var(--ease);flex-shrink:0}
+.bc-item.bc-open .bc-arr{transform:rotate(45deg)}
+.bc-desc{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;padding:0 14px;font-size:.76rem;color:var(--tb);line-height:1.6}
+.bc-desc em{color:var(--gold);font-style:normal}
+.bc-item.bc-open .bc-desc{max-height:90px;padding-bottom:12px}
+.bc-photo{border-radius:var(--radl);overflow:hidden;border:1px solid var(--r2);background:var(--bg4);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-family:var(--fb);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tm)}
+.bc-nope{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.bc-nope-item{background:var(--bg2);border:1px solid var(--r2);border-radius:var(--rad);padding:9px 11px;display:flex;align-items:flex-start;justify-content:space-between;gap:7px;cursor:default;transition:border-color var(--dur) var(--ease)}
+.bc-nope-item:hover{border-color:rgba(185,36,44,.4)}
+.bc-nope-lbl{font-family:var(--fd);font-size:.73rem;font-weight:500;color:var(--th);text-decoration:line-through;text-decoration-color:var(--crim);text-decoration-thickness:2px;line-height:1.3}
+.bc-nope-tag{font-family:var(--fb);font-size:6.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--crim);border:1px solid rgba(185,36,44,.3);padding:2px 5px;border-radius:2px;flex-shrink:0;margin-top:1px}
+.bc-note{font-size:.7rem;color:var(--tm);line-height:1.5;margin-top:6px;font-style:italic;padding-top:8px;border-top:1px solid var(--r2)}
+@media(max-width:1024px){.bc-layout{grid-template-columns:1fr}}
+
+/* ── SYS MODAL (expandable mechanics cards) ── */
+#sys-modal{position:fixed;inset:0;z-index:6000;background:rgba(12,11,10,.97);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:center;justify-content:center}
+#sys-modal.open{opacity:1;pointer-events:all}
+.smo-inner{width:min(920px,94vw);display:flex;flex-direction:column;gap:14px;padding:32px}
+.smo-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.smo-tag{font-family:var(--fb);font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--crim);margin-bottom:5px}
+.smo-title{font-family:var(--fc);font-size:1.6rem;font-weight:700;color:var(--th);margin-bottom:4px}
+.smo-tech{font-family:var(--fb);font-size:.74rem;color:var(--crim);letter-spacing:.05em;margin-bottom:7px}
+.smo-desc{font-size:.82rem;color:var(--tb);line-height:1.65;max-width:580px}
+.smo-close{background:none;border:1px solid var(--r2);border-radius:var(--rad);color:var(--tm);cursor:pointer;width:36px;height:36px;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--dur) var(--ease)}
+.smo-close:hover{border-color:var(--crim);color:var(--criml)}
+.smo-gallery{position:relative;aspect-ratio:16/9;border-radius:var(--radl);overflow:hidden;background:var(--bg4)}
+.smo-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:opacity .55s ease}
+.smo-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(12,11,10,.7);border:1px solid var(--r2);border-radius:var(--rad);color:var(--th);cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all var(--dur) var(--ease);z-index:2}
+.smo-nav:hover{border-color:var(--gold);color:var(--gold)}
+#smo-prev{left:10px}
+#smo-next{right:10px}
+.smo-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.smo-dot{width:6px;height:6px;border-radius:50%;background:var(--r1);border:1px solid var(--tm);cursor:pointer;transition:all var(--dur) var(--ease)}
+.smo-dot.on{background:var(--gold);border-color:var(--gold)}
+
+/* ── SOUND BAR ── */
+.sys-sound-bar{background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);padding:12px 18px;display:flex;align-items:center;gap:16px;margin-top:10px;overflow:hidden}
+.ssb-head{font-family:var(--fd);font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);flex-shrink:0;border-right:1px solid var(--r2);padding-right:16px;min-width:90px}
+.ssb-items{display:flex;gap:0;flex:1}
+.ssb-item{flex:1;padding:0 12px;border-right:1px solid var(--r2)}
+.ssb-item:last-child{border-right:none}
+.ssb-lbl{display:block;font-family:var(--fd);font-size:.74rem;font-weight:600;color:var(--th);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ssb-val{display:block;font-size:.65rem;color:var(--tm);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:1024px){.ssb-items{flex-wrap:wrap}.ssb-item{flex:none;width:50%;padding:4px 0;border:none}}
+@media(max-width:640px){.sys-sound-bar{flex-direction:column;align-items:flex-start}.ssb-head{border-right:none;border-bottom:1px solid var(--r2);padding-bottom:8px;padding-right:0;width:100%}}
+
+/* ── SLIDER FULLSCREEN OVERLAY ── */
+#slider-fs{position:fixed;inset:0;z-index:7000;background:rgba(12,11,10,.98);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px}
+#slider-fs.open{opacity:1;pointer-events:all}
+.sfs-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--r2);border-radius:var(--rad);color:var(--tm);cursor:pointer;width:34px;height:34px;font-size:17px;display:flex;align-items:center;justify-content:center;transition:all var(--dur) var(--ease)}
+.sfs-close:hover{border-color:var(--crim);color:var(--criml)}
+.sfs-wrap{width:min(1200px,90vw)}
+.sfs-hint{font-family:var(--fb);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--tm)}
+
+/* ── TIMELINE SLIDE ── */
+#stline{background:var(--bg)}
+.stl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stl-item{background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);padding:16px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;transition:border-color var(--dur) var(--ease)}
+.stl-item:hover{border-color:var(--goldd)}
+.stl-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stl-item:nth-child(1)::before,.stl-item:nth-child(2)::before{background:var(--crim)}
+.stl-item:nth-child(3)::before,.stl-item:nth-child(4)::before{background:linear-gradient(90deg,var(--crim),var(--gold))}
+.stl-item:nth-child(5)::before,.stl-item:nth-child(6)::before{background:var(--gold)}
+.stl-num{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.06);line-height:1}
+.stl-date{font-family:var(--fd);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--crim)}
+.stl-item:nth-child(5) .stl-date,.stl-item:nth-child(6) .stl-date{color:var(--gold)}
+.stl-title{font-family:var(--fd);font-size:.88rem;font-weight:700;color:var(--th);line-height:1.2}
+.stl-item:nth-child(6) .stl-title{color:var(--gold)}
+.stl-body{font-size:.74rem;color:var(--tb);line-height:1.55;flex:1}
+.stl-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.stl-tags span{font-family:var(--fb);font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:var(--tm);background:var(--bg4);border:1px solid var(--r2);padding:2px 6px;border-radius:2px}
+@media(max-width:1024px){.stl-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.stl-grid{grid-template-columns:1fr}}
+
+/* ── ASSET ACQUISITION FLOW ── */
+.mv-acq{background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);padding:12px 16px;margin-top:12px}
+.mv-acq-head{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.mv-acq-flow{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mv-acq-step{background:var(--bg4);border:1px solid var(--r2);border-radius:var(--rad);padding:7px 11px;text-align:center;flex:1;min-width:70px}
+.mv-acq-step span{display:block;font-family:var(--fd);font-size:.78rem;font-weight:600;color:var(--th)}
+.mv-acq-step small{display:block;font-size:.62rem;color:var(--tm);letter-spacing:.05em;margin-top:2px}
+.mv-acq-arrow{color:var(--gold);font-size:.8rem;flex-shrink:0;opacity:.5}
+
+/* ── SYSC CLICKABLE ── */
+.sysc{cursor:pointer}
+.sysc:active{transform:scale(.97) translateY(0)!important}
 </style>
 </head>
 <body>
@@ -513,19 +618,16 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
   <button class="ndot on" data-i="0" data-label="Portada"></button>
   <button class="ndot" data-i="1" data-label="La Propuesta"></button>
   <button class="ndot" data-i="2" data-label="Por qué VR"></button>
-  <button class="ndot" data-i="3" data-label="Lo que no hicimos"></button>
-  <button class="ndot" data-i="4" data-label="Análisis DAFO"></button>
-  <button class="ndot" data-i="5" data-label="Stack Técnico"></button>
-  <button class="ndot" data-i="6" data-label="Dirección de Arte"></button>
-  <button class="ndot" data-i="7" data-label="Los Cinco Niveles"></button>
-  <button class="ndot" data-i="8" data-label="Assets 3D"></button>
-  <button class="ndot" data-i="9" data-label="7 Sistemas"></button>
-  <button class="ndot" data-i="10" data-label="Diseño de Sonido"></button>
-  <button class="ndot" data-i="11" data-label="Desafíos Técnicos"></button>
-  <button class="ndot" data-i="12" data-label="Conclusiones"></button>
-  <button class="ndot" data-i="13" data-label="Créditos"></button>
+  <button class="ndot" data-i="3" data-label="Análisis DAFO"></button>
+  <button class="ndot" data-i="4" data-label="Mecánicas VR"></button>
+  <button class="ndot" data-i="5" data-label="Dirección de Arte"></button>
+  <button class="ndot" data-i="6" data-label="Los Cuatro Niveles"></button>
+  <button class="ndot" data-i="7" data-label="Assets 3D"></button>
+  <button class="ndot" data-i="8" data-label="Flujo de Trabajo"></button>
+  <button class="ndot" data-i="9" data-label="Conclusiones"></button>
+  <button class="ndot" data-i="10" data-label="Créditos"></button>
 </nav>
-<div id="counter"><b id="cn">01</b> / 12</div>
+<div id="counter"><b id="cn">01</b> / 11</div>
 <button id="np" class="narrow" aria-label="Anterior">&#8593;</button>
 <button id="nn" class="narrow" aria-label="Siguiente">&#8595;</button>
 
@@ -543,7 +645,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
     <div class="s01-eyebrow rv d1">Trabajo Final de Grado · DNAV · UCV · 2025–2026</div>
     <h1 class="s01-title rv d2">Ecos de <span class="gold-shine">Xàtiva</span></h1>
     <p class="s01-xatd rv d3">Experiencia VR inmersiva · Castillo histórico · Unreal Engine 5.4</p>
-    <p class="s01-desc rv d4">Prototipo de realidad virtual standalone para Meta Quest 3 que recrea el Castillo de Xàtiva con 7 sistemas de interacción originales y un pipeline de arte modular de 13 piezas tipológicas.</p>
+    <p class="s01-desc rv d4">Prototipo de realidad virtual standalone para Meta Quest 3 que recrea el Castillo de Xàtiva.</p>
     <div class="s01-authors rv d5">
       <div class="s01-author"><div class="nm">Hugo Ferrer Plaza</div><div class="rl">Diseño 3D · Programación · Arte</div></div>
       <div class="s01-author"><div class="nm">Ignacio Carrascosa Brotons</div><div class="rl">Programación · Sonorización · Concept Art</div></div>
@@ -558,7 +660,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 ================================================================ -->
 <section id="s02" class="slide" data-i="1">
   <div class="slide-inner">
-    <div class="snum rv">02 / 14</div>
+    <div class="snum rv">02 / 11</div>
     <div class="stag rv d1">La Propuesta</div>
     <h2 class="sh rv d2">La vitrina se <span style="color:var(--crim)">rompe</span></h2>
     <div class="div rv d2"></div>
@@ -579,157 +681,66 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         <p>Prototipo VR 100% funcional y standalone. Sin cables, sin PC. 7 sistemas de interacción originales para Meta Quest 3, a 72fps. Arte estilizado con referentes de For Honor, Assassin's Creed y A Plague Tale.</p>
       </div>
     </div>
-    <div class="s02-stats rv d4">
-      <div class="sbox"><span class="n"><span data-count="7">0</span></span><span class="l">Sistemas originales</span></div>
-      <div class="sbox"><span class="n"><span data-count="4">0</span></span><span class="l">Niveles diseñados</span></div>
-      <div class="sbox"><span class="n"><span data-count="72">0</span><span class="u"> fps</span></span><span class="l">Target Meta Quest 3</span></div>
-      <div class="sbox"><span class="n"><span data-count="10">0</span></span><span class="l">Assets 3D históricos</span></div>
+    <div class="s02-pills rv d4">
+      <div class="spill"><span class="spill-n">Meta Quest 3</span><span class="spill-l">Standalone · sin PC</span></div>
+      <div class="spill"><span class="spill-n">4 Niveles</span><span class="spill-l">Diseñados y jugables</span></div>
+      <div class="spill"><span class="spill-n">7 Mecánicas</span><span class="spill-l">Sistemas originales VR</span></div>
+      <div class="spill"><span class="spill-n">9 Meses</span><span class="spill-l">Sep 2025 → Jun 2026</span></div>
+      <div class="spill"><span class="spill-n">72 fps</span><span class="spill-l">Target constante</span></div>
     </div>
   </div>
 </section>
 
 <!-- ================================================================
-     S02b — POR QUÉ VR: TEORÍA, PSICOLOGÍA Y JUSTIFICACIÓN
+     S02bc — POR QUÉ VR + LO QUE NO HICIMOS (combinado)
 ================================================================ -->
-<section id="s02b" class="slide" data-i="2">
+<section id="s02bc" class="slide" data-i="2">
   <div class="slide-inner">
-    <div class="snum rv">03 / 14</div>
-    <div class="stag rv d1">Fundamento Científico</div>
-    <h2 class="sh rv d2">¿Por qué <span style="color:var(--crim)">funciona</span> la realidad virtual?</h2>
+    <div class="snum rv">03 / 11</div>
+    <div class="stag rv d1">Fundamentos y Decisiones</div>
+    <h2 class="sh rv d2">¿Por qué <span style="color:var(--crim)">VR</span>? · Lo que <span style="color:var(--crim)">no</span> hicimos</h2>
     <div class="div rv d2"></div>
+    <div class="bc-layout rv d3">
 
-    <div class="vr-theory-grid rv d3">
-
-      <!-- Columna izquierda: las tres teorías -->
-      <div class="vr-theory-col">
-
-        <div class="vr-theory-card">
-          <div class="vr-theory-num">01</div>
-          <div>
-            <div class="vr-theory-label">Presencia e Ilusión de Lugar</div>
-            <p class="vr-theory-body">El cerebro acepta el entorno virtual como real cuando el estímulo visual, sonoro y físico son coherentes entre sí. <em>(Slater, 2009)</em> La VR no «engaña» al usuario: le ofrece un entorno que su sistema perceptivo puede habitar.</p>
+      <!-- LEFT: VR Theory accordion -->
+      <div class="bc-col">
+        <div class="bc-head">¿Por qué funciona la realidad virtual?</div>
+        <div class="bc-acc">
+          <div class="bc-item bc-open">
+            <div class="bc-title">01 · Presencia e Ilusión de Lugar <span class="bc-arr">+</span></div>
+            <div class="bc-desc">El cerebro acepta el entorno virtual como real cuando estímulo visual, sonoro y físico son coherentes. <em>(Slater, 2009)</em> La VR no engaña al usuario: le ofrece un entorno que su percepción puede habitar.</div>
+          </div>
+          <div class="bc-item">
+            <div class="bc-title">02 · Cognición Corporizada <span class="bc-arr">+</span></div>
+            <div class="bc-desc">El conocimiento se consolida cuando el cuerpo participa. Tensar el arco con tus manos genera comprensión que ningún cartel puede replicar. <em>(Wilson, 2002)</em></div>
+          </div>
+          <div class="bc-item">
+            <div class="bc-title">03 · Embodiment y Agencia <span class="bc-arr">+</span></div>
+            <div class="bc-desc">La sensación de que las manos virtuales son las propias activa el sistema de memoria episódica, generando recuerdos más vívidos y duraderos. <em>(Kilteni, 2012)</em></div>
+          </div>
+          <div class="bc-item">
+            <div class="bc-title">04 · El juego como pedagogía <span class="bc-arr">+</span></div>
+            <div class="bc-desc">Objetivo claro, feedback inmediato, progresión graduada. Las mecánicas de videojuego son el sistema de aprendizaje más eficiente que existe. <em>(Gee, 2003)</em></div>
           </div>
         </div>
+        <div class="bc-photo">INSERTAR FOTO AQUÍ</div>
+      </div>
 
-        <div class="vr-theory-card">
-          <div class="vr-theory-num">02</div>
-          <div>
-            <div class="vr-theory-label">Cognición Corporizada</div>
-            <p class="vr-theory-body">El conocimiento se consolida más profundamente cuando el cuerpo participa en el proceso. <em>(Wilson, 2002; Zhao, 2025)</em> Tensar el arco con las propias manos genera una comprensión del arma que ninguna cartel informativo puede replicar.</p>
-          </div>
+      <!-- RIGHT: Nope grid -->
+      <div class="bc-col">
+        <div class="bc-head">Lo que decidimos NO hacer</div>
+        <div class="bc-nope">
+          <div class="bc-nope-item"><span class="bc-nope-lbl">PCVR / Cable</span><span class="bc-nope-tag">Viabilidad</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">Lumen</span><span class="bc-nope-tag">Rendimiento</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">Nanite</span><span class="bc-nope-tag">Compat.</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">IK Cuerpo completo</span><span class="bc-nope-tag">UX</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">Multijugador</span><span class="bc-nope-tag">Alcance</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">Sistema guardado</span><span class="bc-nope-tag">Alcance</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">Quest 1 / Quest 2</span><span class="bc-nope-tag">Rendimiento</span></div>
+          <div class="bc-nope-item"><span class="bc-nope-lbl">Snap-grab armas</span><span class="bc-nope-tag">Diseño</span></div>
         </div>
-
-        <div class="vr-theory-card">
-          <div class="vr-theory-num">03</div>
-          <div>
-            <div class="vr-theory-label">Embodiment y Agencia</div>
-            <p class="vr-theory-body">La sensación de que las manos virtuales son las manos propias del usuario <em>(Kilteni et al., 2012)</em> activa el mismo sistema de memoria episódica que los recuerdos físicos reales, generando un recuerdo más vívido y duradero.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Columna derecha: implicaciones concretas -->
-      <div class="vr-theory-col">
-
-        <div class="vr-theory-head">¿Qué implica esto para el patrimonio?</div>
-
-        <div class="vr-impl-item">
-          <span class="vr-impl-icon">🏛️</span>
-          <div>
-            <div class="vr-impl-label">Del objeto al sujeto</div>
-            <p class="vr-impl-body">El visitante ya no <em>ve</em> la daga nazarí; la <em>sostiene</em>. El cambio de rol activa procesos cognitivos que la visita pasiva nunca desencadena.</p>
-          </div>
-        </div>
-
-        <div class="vr-impl-item">
-          <span class="vr-impl-icon">🧠</span>
-          <div>
-            <div class="vr-impl-label">Retención significativamente mayor</div>
-            <p class="vr-impl-body">Estudios sobre VR en entornos patrimoniales demuestran que la interacción directa con recreaciones históricas aumenta la implicación del visitante y la retención de información. <em>(Liu et al., 2021)</em></p>
-          </div>
-        </div>
-
-        <div class="vr-impl-item">
-          <span class="vr-impl-icon">⚡</span>
-          <div>
-            <div class="vr-impl-label">El juego como vehículo pedagógico</div>
-            <p class="vr-impl-body">Las mecánicas de videojuego —objetivo claro, feedback inmediato, progresión— son el sistema de aprendizaje más eficiente que existe para cualquier tipo de usuario, sin importar su edad o formación. <em>(Gee, 2003)</em></p>
-          </div>
-        </div>
-
-        <div class="vr-impl-item vr-impl-item--highlight">
-          <span class="vr-impl-icon">🎯</span>
-          <div>
-            <div class="vr-impl-label">Ecos de Xàtiva aplica todo esto</div>
-            <p class="vr-impl-body">Cada decisión de diseño —desde la progresión de espacios hasta el feedback háptico del arco— tiene respaldo en psicología cognitiva y diseño de experiencias inmersivas, no solo en criterio artístico.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
-     S02c — LO QUE NO HICIMOS (Y POR QUÉ)
-================================================================ -->
-<section id="s02c" class="slide" data-i="3">
-  <div class="slide-inner">
-    <div class="snum rv">04 / 14</div>
-    <div class="stag rv d1">Decisiones Conscientes</div>
-    <h2 class="sh rv d2">Lo que <span style="color:var(--crim)">no</span> hicimos — y por qué</h2>
-    <div class="div rv d2"></div>
-    <p class="rv d3" style="font-size:.82rem;color:var(--tm);max-width:700px;margin-bottom:22px">Cada característica descartada fue una decisión fundamentada en tiempo, rendimiento, alcance o viabilidad real del proyecto.</p>
-
-    <div class="nope-grid rv d3">
-
-      <div class="nope-card">
-        <div class="nope-label">PCVR / Cable</div>
-        <div class="nope-reason">Un museo no puede depender de un PC de 2.000€ por unidad VR. El standalone es la única opción con viabilidad operativa real en un entorno cultural.</div>
-        <div class="nope-tag">Viabilidad</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Lumen (iluminación dinámica)</div>
-        <div class="nope-reason">Lumen consume GPU en tiempo real. En Meta Quest 3 standalone provoca caídas por debajo de 72 fps, umbral de VR sickness. Usamos lightmaps precomputados: misma calidad visual, coste cero en runtime.</div>
-        <div class="nope-tag">Rendimiento</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Nanite (geometría virtual)</div>
-        <div class="nope-reason">Nanite no es compatible con el pipeline de renderizado de Android / Meta Quest 3. El arte modular optimizado cumple los mismos objetivos sin dependencia de la feature.</div>
-        <div class="nope-tag">Compatibilidad</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Cuerpo completo con IK</div>
-        <div class="nope-reason">Calcular cinemática inversa desde solo tres puntos de tracking (visor + dos mandos) genera posturas antinaturales que rompen la inmersión más que las manos flotantes. Decisión de UX, no de coste.</div>
-        <div class="nope-tag">UX</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Multijugador</div>
-        <div class="nope-reason">La sincronización en red de físicas complejas (corte procedural, Chaos) en standalone es un problema de ingeniería de semanas. El foco es la profundidad de la experiencia individual, no la escala social.</div>
-        <div class="nope-tag">Alcance</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Sistema de guardado</div>
-        <div class="nope-reason">La experiencia dura 15-20 minutos y está pensada como visita continua, no como sesión interrumpible. Añadir guardado habría requerido diseñar un sistema de estado global que no aporta valor en ese rango de duración.</div>
-        <div class="nope-tag">Alcance</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Meta Quest 2 / Quest 1</div>
-        <div class="nope-reason">Chaos Destruction y el corte procedural C++ requieren la capacidad de cómputo del Snapdragon XR2 Gen 2 (Quest 3). Mantener Quest 2 habría obligado a eliminar los dos sistemas técnicamente más relevantes del proyecto.</div>
-        <div class="nope-tag">Rendimiento</div>
-      </div>
-
-      <div class="nope-card">
-        <div class="nope-label">Snap-grab en armas</div>
-        <div class="nope-reason">El agarre asistido fija las armas en postura predefinida y elimina la sensación de peso y resistencia real. Decidimos priorizar embodiment sobre accesibilidad para potenciar la experiencia.</div>
-        <div class="nope-tag">Diseño</div>
+        <p class="bc-note">Cada descarte fue una decisión fundamentada en rendimiento, alcance o experiencia de usuario — no en falta de capacidad.</p>
+        <div class="bc-photo" style="margin-top:4px">INSERTAR FOTO AQUÍ</div>
       </div>
 
     </div>
@@ -739,9 +750,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S03 — DAFO
 ================================================================ -->
-<section id="s03" class="slide" data-i="4">
+<section id="s03" class="slide" data-i="3">
   <div class="slide-inner">
-    <div class="snum rv">05 / 14</div>
+    <div class="snum rv">04 / 11</div>
     <div class="stag rv d1">Análisis Estratégico</div>
     <h2 class="sh rv d2">Posicionamiento del proyecto</h2>
     <div class="div rv d2"></div>
@@ -768,9 +779,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         </div>
         <div class="mkt-panel">
           <h3>Mercado Objetivo</h3>
-          <div class="mkt-row"><span>Museos en España con digitalización activa</span><strong>~800</strong></div>
+          <div class="mkt-row"><span>Museos en España con presencia digital activa</span><strong>~800</strong></div>
           <div class="mkt-row"><span>Visitantes anuales Castillo de Xàtiva</span><strong>+90 k</strong></div>
-          <div class="mkt-row"><span>Crecimiento mercado VR educativo (CAGR)</span><strong>+19 %</strong></div>
+          <div class="mkt-row"><span>Crecimiento mercado VR educativo (CAGR 2024–2029)</span><strong>+19 %</strong></div>
         </div>
       </div>
     </div>
@@ -780,11 +791,11 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S04 — STACK TÉCNICO
 ================================================================ -->
-<section id="s04" class="slide" data-i="5">
+<section id="s04" class="slide" data-i="4">
   <div class="slide-inner">
-    <div class="snum rv">06 / 14</div>
-    <div class="stag rv d1">Sistemas de Interacción</div>
-    <h2 class="sh rv d2">7 mecánicas originales para VR</h2>
+    <div class="snum rv">05 / 11</div>
+    <div class="stag rv d1">Mecánicas y Programación</div>
+    <h2 class="sh rv d2">Mecánicas <span style="color:var(--crim)">originales</span> para VR</h2>
     <div class="div rv d2"></div>
     <div class="plt-bar rv d3">
       <div class="plt-item">
@@ -803,7 +814,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
       </div>
     </div>
     <div class="sys-cards rv d4">
-      <div class="sysc">
+      <div class="sysc" data-sys="1" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/TutorialArco.png" alt="Arco">
           <span class="sysc-badge tgold">Blueprint</span>
@@ -814,7 +825,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
           <div class="sysc-tk">SplineComponent · Pitch Audio Variable</div>
         </div>
       </div>
-      <div class="sysc">
+      <div class="sysc" data-sys="2" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/TutorialBallesta.png" alt="Ballesta">
           <span class="sysc-badge tgold">Blueprint</span>
@@ -825,7 +836,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
           <div class="sysc-tk">VR Gun Template · Bolt Trajectory</div>
         </div>
       </div>
-      <div class="sysc">
+      <div class="sysc" data-sys="3" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/TutorialEspada.jpg" alt="Espada">
           <span class="sysc-badge tred">C++</span>
@@ -836,7 +847,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
           <div class="sysc-tk">SliceProceduralMesh · Sweep Trace C++</div>
         </div>
       </div>
-      <div class="sysc">
+      <div class="sysc" data-sys="4" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/Tutorial Canon.jpg" alt="Cañón">
           <span class="sysc-badge tgold">Blueprint</span>
@@ -847,7 +858,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
           <div class="sysc-tk">5 BPs · Chaos Destruction · 7 Fases</div>
         </div>
       </div>
-      <div class="sysc">
+      <div class="sysc" data-sys="5" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/MuseoInterior2.png" alt="Objetos Museo">
           <span class="sysc-badge tgold">Blueprint</span>
@@ -858,7 +869,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
           <div class="sysc-tk">BP Inheritance · Emissive Pickup</div>
         </div>
       </div>
-      <div class="sysc">
+      <div class="sysc" data-sys="6" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/PersonajeGuia.png" alt="Audioguía">
           <span class="sysc-badge tgold">Blueprint</span>
@@ -869,7 +880,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
           <div class="sysc-tk">Game Instance · Set&#60;Name&#62;</div>
         </div>
       </div>
-      <div class="sysc">
+      <div class="sysc" data-sys="7" title="Ver detalles">
         <div class="sysc-img-wrap">
           <img class="sysc-img" src="./Imagenes/IsometricoTP.png" alt="Teletransporte">
           <span class="sysc-badge tgold">Blueprint</span>
@@ -881,15 +892,24 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         </div>
       </div>
     </div>
+    <div class="sys-sound-bar rv d5">
+      <span class="ssb-head">Sonorización</span>
+      <div class="ssb-items">
+        <div class="ssb-item"><span class="ssb-lbl">Música Medieval</span><span class="ssb-val">Composición original · loop crossfade</span></div>
+        <div class="ssb-item"><span class="ssb-lbl">MetaSounds</span><span class="ssb-val">SFX procedural · variación impacto</span></div>
+        <div class="ssb-item"><span class="ssb-lbl">Audio Espacial</span><span class="ssb-val">Attenuation + Reverb por sala</span></div>
+        <div class="ssb-item"><span class="ssb-lbl">Audioguía IA</span><span class="ssb-val">ElevenLabs · narración histórica</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ================================================================
      S05 — DIRECCIÓN DE ARTE
 ================================================================ -->
-<section id="s05" class="slide" data-i="6">
+<section id="s05" class="slide" data-i="5">
   <div class="slide-inner">
-    <div class="snum rv">07 / 14</div>
+    <div class="snum rv">06 / 11</div>
     <div class="stag rv d1">Dirección de Arte</div>
     <h2 class="sh rv d2">Estilización sobre el hiperrealismo</h2>
     <div class="div rv d2"></div>
@@ -913,16 +933,16 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         <p class="refs-title">Referencias visuales</p>
         <div class="refs-grid">
           <div class="ref-card">
-            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/304390/ss_4d71d0150ad7e55b8d3883dba083dc187a7ebfae.1920x1080.jpg?t=1778259779" alt="For Honor" loading="lazy">
-            <p><em>For Honor</em>Autenticidad medieval · Arquitectura gótica</p>
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2835570/capsule_616x353.jpg" alt="World of Warcraft" loading="lazy">
+            <p><em>World of Warcraft</em>Escala épica · Arte cartoon medieval</p>
           </div>
           <div class="ref-card">
-            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/289650/ss_19c1c8d52d714fe8d0a0277c36832b4e0ad5def3.1920x1080.jpg?t=1773328332" alt="Assassin's Creed Unity" loading="lazy">
-            <p><em>Assassin's Creed</em>Detalle histórico · Escala monumental</p>
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/288470/capsule_616x353.jpg" alt="Fable Anniversary" loading="lazy">
+            <p><em>Fable Anniversary</em>Fantasía estilizada · Tono whimsical</p>
           </div>
           <div class="ref-card">
-            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/752590/ss_8433438bf03b7f524e6cf3ac81e99e96be2188c8.1920x1080.jpg?t=1727793332" alt="A Plague Tale" loading="lazy">
-            <p><em>A Plague Tale</em>Paleta ocre · Atmósfera densa</p>
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1030210/capsule_616x353.jpg" alt="Torchlight III" loading="lazy">
+            <p><em>Torchlight III</em>Paleta vibrante · Mundo medieval</p>
           </div>
         </div>
         <div class="method-box" style="margin-top:20px">
@@ -933,9 +953,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         </div>
       </div>
       <div class="rvr d4">
-        <p style="font-family:var(--fd);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Arrastra el slider para comparar render / wireframe</p>
+        <p style="font-family:var(--fd);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Arrastra para comparar · Clic para ampliar</p>
         <div class="wf-grid">
-          <div class="rw-slider-wrap" data-rw>
+          <div class="rw-slider-wrap" data-rw data-img-r="./Imagenes/Boveda.png" data-img-w="./Imagenes/BovedaWF.png" data-rw-fs>
             <img class="rw-slider-img" src="./Imagenes/Boveda.png" alt="Bóveda render">
             <img class="rw-slider-img wf" src="./Imagenes/BovedaWF.png" alt="Bóveda wireframe">
             <div class="rw-slider-line"></div>
@@ -943,7 +963,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
             <span class="rw-label rw-label-r">Render</span>
             <span class="rw-label rw-label-w">Wireframe</span>
           </div>
-          <div class="rw-slider-wrap" data-rw>
+          <div class="rw-slider-wrap" data-rw data-img-r="./Imagenes/Columnas.png" data-img-w="./Imagenes/ColumnasWF.png" data-rw-fs>
             <img class="rw-slider-img" src="./Imagenes/Columnas.png" alt="Columnas render">
             <img class="rw-slider-img wf" src="./Imagenes/ColumnasWF.png" alt="Columnas wireframe">
             <div class="rw-slider-line"></div>
@@ -951,7 +971,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
             <span class="rw-label rw-label-r">Render</span>
             <span class="rw-label rw-label-w">Wireframe</span>
           </div>
-          <div class="rw-slider-wrap" data-rw>
+          <div class="rw-slider-wrap" data-rw data-img-r="./Imagenes/Escaleras.png" data-img-w="./Imagenes/EscalerasWF.png" data-rw-fs>
             <img class="rw-slider-img" src="./Imagenes/Escaleras.png" alt="Escaleras render">
             <img class="rw-slider-img wf" src="./Imagenes/EscalerasWF.png" alt="Escaleras wireframe">
             <div class="rw-slider-line"></div>
@@ -959,7 +979,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
             <span class="rw-label rw-label-r">Render</span>
             <span class="rw-label rw-label-w">Wireframe</span>
           </div>
-          <div class="rw-slider-wrap" data-rw>
+          <div class="rw-slider-wrap" data-rw data-img-r="./Imagenes/ParedLisa.png" data-img-w="./Imagenes/ParedLisaWF.png" data-rw-fs>
             <img class="rw-slider-img" src="./Imagenes/ParedLisa.png" alt="Pared lisa render">
             <img class="rw-slider-img wf" src="./Imagenes/ParedLisaWF.png" alt="Pared lisa wireframe">
             <div class="rw-slider-line"></div>
@@ -968,8 +988,8 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
             <span class="rw-label rw-label-w">Wireframe</span>
           </div>
         </div>
-        <div style="background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);overflow:hidden;margin-top:12px">
-          <img src="./Imagenes/PropsModularesShowcase.png" alt="Props modulares showcase" style="width:100%;aspect-ratio:16/7;object-fit:cover;display:block">
+        <div style="background:var(--bg2);border:1px solid var(--r2);border-radius:var(--radl);overflow:hidden;margin-top:12px;cursor:zoom-in" data-zoom="./Imagenes/PropsModularesShowcase.png">
+          <img src="./Imagenes/PropsModularesShowcase.png" alt="Props modulares showcase" style="width:100%;aspect-ratio:16/7;object-fit:cover;display:block;pointer-events:none">
         </div>
       </div>
     </div>
@@ -979,9 +999,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S06 — LOS CINCO NIVELES
 ================================================================ -->
-<section id="s06" class="slide" data-i="7">
+<section id="s06" class="slide" data-i="6">
   <div class="slide-inner">
-    <div class="snum rv">08 / 14</div>
+    <div class="snum rv">07 / 11</div>
     <div class="stag rv d1">Diseño de Niveles</div>
     <h2 class="sh rv d2">Los cuatro espacios del castillo</h2>
     <div class="div rv d2"></div>
@@ -1038,13 +1058,13 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S07 — ASSETS HISTÓRICOS 3D
 ================================================================ -->
-<section id="s07" class="slide" data-i="8">
+<section id="s07" class="slide" data-i="7">
   <div class="slide-inner">
-    <div class="snum rv">09 / 14</div>
+    <div class="snum rv">08 / 11</div>
     <div class="stag rv d1">Assets Históricos</div>
     <h2 class="sh rv d2">Colección 3D interactiva</h2>
     <div class="div rv d2"></div>
-    <p class="rv d3" style="font-size:.82rem;color:var(--tm);margin-bottom:0">Arrastra para rotar · Scroll para zoom · Todos los modelos son originales creados en Blender con materiales PBR.</p>
+    <p class="rv d3" style="font-size:.82rem;color:var(--tm);margin-bottom:0">Arrastra para rotar · Scroll para zoom · Adquisición mediante fotogrametría IA (Tencent Huayan), retopología en Maya, texturas PBR en Substance Painter.</p>
     <div class="mv-grid rv d4">
       <div class="mv-wrap">
         <div class="mv-canvas-wrap"><canvas class="mv-canvas" data-model="./modelos/espada.glb"></canvas><div class="mv-loading">Cargando...</div><img class="mv-fallback" src="./Imagenes/EspadaRender.png" alt="" style="display:none"></div>
@@ -1067,154 +1087,83 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
         <div class="mv-lbl">Arco</div><div class="mv-sub">Recurvo · 1.4 m</div>
       </div>
     </div>
-    <p class="mv-hint rv d5">Si los modelos no cargan, abre el archivo desde un servidor local (ej: Live Server en VS Code)</p>
-  </div>
-</section>
-
-<!-- ================================================================
-     S08 — PROGRAMACIÓN: 7 SISTEMAS
-================================================================ -->
-<section id="s08" class="slide" data-i="9">
-  <div class="slide-inner">
-    <div class="snum rv">10 / 14</div>
-    <div class="stag rv d1">Programación</div>
-    <h2 class="sh rv d2">Siete sistemas de interacción</h2>
-    <div class="div rv d2"></div>
-    <p class="rv d3" style="font-size:.84rem;color:var(--tm);margin-bottom:0">Haz clic en cada sistema para ver los detalles de implementación.</p>
-    <div class="acc-grid rv d4">
-      <div class="acc-item open" id="acc-1"><div class="acc-hd"><span class="acc-sn">01</span><span class="acc-nm">Arco</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">SplineComponent · UE5 Blueprint · AudioComponent</div><p class="acc-ds">La cuerda es un SplineComponent que se deforma en tiempo real según la posición del controlador. El audio reproduce pitch variable: a mayor tensión, tono más agudo. La fuerza de disparo se calcula a partir del delta de estiramiento y se aplica como impulso al proyectil generado en el punto de salida de la flecha.</p></div></div></div>
-      <div class="acc-item" id="acc-2"><div class="acc-hd"><span class="acc-sn">02</span><span class="acc-nm">Ballesta</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">VR Gun Template · Procedural Bolt · LineTrace</div><p class="acc-ds">Basado en VR Gun Template. El perno sigue trayectoria parabólica con ProjectileMovementComponent. Sistema de recarga háptica: el jugador recarga manualmente tirando de la cuerda. LineTrace detecta impacto con feedback visual y sonoro en el punto de colisión.</p></div></div></div>
-      <div class="acc-item" id="acc-3"><div class="acc-hd"><span class="acc-sn">03</span><span class="acc-nm">Espada</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">C++ · ASwordActor · AProceduralCuttableActor · SliceProceduralMesh</div><p class="acc-ds">El más complejo técnicamente. ASwordActor (C++) registra SweepTrace en cada tick. Si detecta colisión con AProceduralCuttableActor, invoca SliceProceduralMesh con el plano definido por la trayectoria de la hoja. Los fragmentos tienen física independiente y se destruyen tras un timer configurable para evitar acumulación.</p></div></div></div>
-      <div class="acc-item" id="acc-4"><div class="acc-hd"><span class="acc-sn">04</span><span class="acc-nm">Cañón</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">5 Blueprints · Chaos Destruction · 7 Fases de activación</div><p class="acc-ds">7 fases: carga de pólvora, inserción del proyectil, apuntado, encendido de mecha, disparo con cámara lenta, impacto con Chaos Destruction (la pared se fragmenta en cuerpos físicos independientes) y reset completo del estado. El más elaborado en número de Blueprints coordinados.</p></div></div></div>
-      <div class="acc-item" id="acc-5"><div class="acc-hd"><span class="acc-sn">05</span><span class="acc-nm">Objetos Museo</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">Blueprint Inheritance · Actor Base · Emissive Material · Widget UI</div><p class="acc-ds">BP_MuseoObjectBase define la interfaz (pickup, info display). Cada objeto hereda y sobrescribe sus datos. Al acercarse el jugador se activa un emissive glow en el material y aparece un Widget 3D flotante con información histórica contextual del artefacto.</p></div></div></div>
-      <div class="acc-item" id="acc-6"><div class="acc-hd"><span class="acc-sn">06</span><span class="acc-nm">Audioguía</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">Game Instance · Set&lt;Name&gt; · BoxTrigger · UAudioComponent</div><p class="acc-ds">El Game Instance mantiene un Set&lt;Name&gt; de audios ya reproducidos. Al entrar en un BoxTrigger, consulta si el ID ya fue reproducido. Si no, reproduce la narración y lo añade al Set. Persiste entre cambios de nivel, evitando repetición no deseada sin necesidad de Game Save.</p></div></div></div>
-      <div class="acc-item" id="acc-7"><div class="acc-hd"><span class="acc-sn">07</span><span class="acc-nm">Teletransporte</span><span class="acc-cv">&#9660;</span></div><div class="acc-bd"><div class="acc-ct"><div class="acc-tk">Camera Fade · Widget 3D · Find Look At Rotation · VRPawn</div><p class="acc-ds">Diseñado para minimizar el mareo por movimiento (VR sickness). CameraFade negro in/out, VRPawn se teleporta a destino, Find Look At Rotation orienta automáticamente al jugador hacia el punto de interés más cercano. Widget 3D en destino muestra preview del área antes de confirmar.</p></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
-     S09 — DISEÑO DE SONIDO
-================================================================ -->
-<section id="s09" class="slide" data-i="10">
-  <div class="slide-inner">
-    <div class="snum rv">11 / 14</div>
-    <div class="stag rv d1">Diseño de Sonido</div>
-    <h2 class="sh rv d2">Arquitectura sonora del castillo</h2>
-    <div class="div rv d2"></div>
-    <div class="snd-layout">
-      <div class="rvl d3">
-        <div class="snd-panel">
-          <div class="snd-ph">Sistema de Música</div>
-          <div class="snd-item"><div class="snd-ico">MUS</div><div><h4>Música Medieval Ambiente</h4><p>Composición original estilo s.XIII. Instrumentos de cuerda y viento de época. Reproducida en loop con crossfade entre niveles.</p></div></div>
-          <div class="snd-item"><div class="snd-ico">MIX</div><div><h4>Capas Dinámicas</h4><p>SoundMix varía según contexto: capa de percusión en combate, cuerda suave en museo. Sound Class y SoundMix de UE5.</p></div></div>
-          <div class="snd-item"><div class="snd-ico">SFX</div><div><h4>SFX de Armas</h4><p>Arco con pitch variable por tensión. Cañón con 3 capas de explosión (close, mid, far) mezcladas dinámicamente. Metasounds para variación procedural.</p></div></div>
-        </div>
-        <div class="snd-panel" style="margin-top:14px">
-          <div class="snd-ph">Audio Espacial</div>
-          <div class="snd-item"><div class="snd-ico">ATT</div><div><h4>Attenuation Settings</h4><p>Todos los SFX con Sound Attenuation personalizado. Reverberación variable por sala (capilla, corredor, exterior) mediante Audio Volume y Reverb Effects.</p></div></div>
-          <div class="snd-item"><div class="snd-ico">META</div><div><h4>Metasounds</h4><p>Generación procedural de variaciones de impacto para evitar repetición robótica. Parámetros expuestos para ajuste dinámico por Blueprint.</p></div></div>
-        </div>
+    <div class="mv-acq rv d5">
+      <div class="mv-acq-head">
+        <img src="./Imagenes/ImagenTencent.png" alt="Tencent Huayan" style="height:20px;filter:brightness(.85);object-fit:contain">
+        <span>Flujo de adquisición · Fotogrametría con IA</span>
       </div>
-      <div class="rvr d4">
-        <div class="diag-panel">
-          <h3>Flujo del Sistema Audioguía</h3>
-          <div class="diag-flow">
-            <div class="dstep"><span class="dsn">01</span>Jugador entra en BoxTrigger de punto de interés</div>
-            <div class="darr">&#8595;</div>
-            <div class="dstep"><span class="dsn">02</span>Consulta al Game Instance: ¿ID de audio ya reproducido?</div>
-            <div class="darr">&#8595;</div>
-            <div class="dstep"><span class="dsn">03a</span>Si NO: reproduce narración + añade ID al Set&lt;Name&gt;</div>
-            <div class="dstep"><span class="dsn">03b</span>Si SÍ: no hace nada (evita repetición no deseada)</div>
-            <div class="darr">&#8595;</div>
-            <div class="dstep"><span class="dsn">04</span>NPC guía sincroniza animación facial con audio activo</div>
-          </div>
-        </div>
-        <div style="background:var(--bg2);border:1px solid var(--goldd);border-radius:var(--radl);padding:20px;margin-top:14px">
-          <p style="font-family:var(--fd);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Narrador del castillo</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div style="background:var(--bg4);border:1px solid var(--r2);border-radius:var(--radl);padding:16px;text-align:center">
-              <div style="font-family:var(--fc);font-size:.9rem;color:var(--gold);margin-bottom:6px">El Guía</div>
-              <div style="font-size:.76rem;color:var(--tm);line-height:1.5">Narrador principal. Voz grave. Contextualiza históricamente cada sala y arma del museo.</div>
-            </div>
-            <div style="background:var(--bg4);border:1px solid var(--r2);border-radius:var(--radl);padding:16px;text-align:center">
-              <div style="font-family:var(--fc);font-size:.9rem;color:var(--gold);margin-bottom:6px">El Cronista</div>
-              <div style="font-size:.76rem;color:var(--tm);line-height:1.5">Voz de los objetos. Narración en primera persona desde la perspectiva del artefacto. Más poética.</div>
-            </div>
-          </div>
-        </div>
+      <div class="mv-acq-flow">
+        <div class="mv-acq-step"><span>Tencent Huayan</span><small>Fotogrametría IA</small></div>
+        <span class="mv-acq-arrow">&#8594;</span>
+        <div class="mv-acq-step"><span>Maya</span><small>Retopología</small></div>
+        <span class="mv-acq-arrow">&#8594;</span>
+        <div class="mv-acq-step"><span>Substance Painter</span><small>Texturas PBR</small></div>
+        <span class="mv-acq-arrow">&#8594;</span>
+        <div class="mv-acq-step"><span>Unreal Engine</span><small>Reduction + LOD</small></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================================================================
-     S10 — DESAFÍOS TÉCNICOS
+     STLINE — FLUJO DE TRABAJO (Timeline, data-i=8)
 ================================================================ -->
-<section id="s10" class="slide" data-i="11">
+<section id="stline" class="slide" data-i="8">
   <div class="slide-inner">
-    <div class="snum rv">12 / 14</div>
-    <div class="stag rv d1">Desafíos Técnicos</div>
-    <h2 class="sh rv d2">Problemas reales, soluciones reales</h2>
+    <div class="snum rv">09 / 11</div>
+    <div class="stag rv d1">Flujo de Trabajo</div>
+    <h2 class="sh rv d2">9 meses de producción</h2>
     <div class="div rv d2"></div>
-    <div class="chal-grid">
-      <div class="chal-card rv d2">
-        <img class="chal-img" src="./Imagenes/CampoEntrenamiento1.png" alt="Optimización VR">
-        <div class="chal-body">
-          <div class="chal-num">01</div>
-          <div class="chal-title">Optimización VR a 72 fps</div>
-          <div class="chal-row chal-prob">
-            <h4>Problema</h4>
-            <p>Lumen + Niagara sin presupuesto en Quest 3 standalone: 40–45 fps. Por debajo de 72 fps la experiencia genera VR sickness.</p>
-          </div>
-          <div class="chal-row chal-sol">
-            <h4>Solución</h4>
-            <p>Baked lighting, presupuesto Niagara por nivel, LODs manuales a 2 m, occlusion culling agresivo, Static Mesh en lugar de Nanite.</p>
-          </div>
-          <div class="chal-row chal-res">
-            <h4>Resultado</h4>
-            <p><span class="chal-result">72 fps</span>Estables en todos los niveles. Cero VR sickness en playtesting.</p>
-          </div>
-        </div>
+    <div class="stl-grid rv d3">
+
+      <div class="stl-item">
+        <div class="stl-num">01</div>
+        <div class="stl-date">Sep – Nov 2025</div>
+        <div class="stl-title">Concepción</div>
+        <div class="stl-body">Formación del equipo, descarte de animación en favor de VR interactiva. Ignacio propone el Castillo de Xàtiva como tema central.</div>
+        <div class="stl-tags"><span>Concepto</span><span>TFG UCV</span></div>
       </div>
-      <div class="chal-card rv d3">
-        <img class="chal-img" src="./Imagenes/TutorialEspada.jpg" alt="Corte Procedural">
-        <div class="chal-body">
-          <div class="chal-num">02</div>
-          <div class="chal-title">Corte Procedural en C++</div>
-          <div class="chal-row chal-prob">
-            <h4>Problema</h4>
-            <p>SliceProceduralMesh con cortes rápidos acumulaba memory leaks y microstutters visibles en el GC de UE5.</p>
-          </div>
-          <div class="chal-row chal-sol">
-            <h4>Solución</h4>
-            <p>Pool de geometría, límite de 8 fragmentos activos, timer de destrucción a 4 s, máx. 3 cortes simultáneos por malla.</p>
-          </div>
-          <div class="chal-row chal-res">
-            <h4>Resultado</h4>
-            <p><span class="chal-result">0 stutters</span>En tests completos. Sistema más aplaudido por los testers.</p>
-          </div>
-        </div>
+
+      <div class="stl-item">
+        <div class="stl-num">02</div>
+        <div class="stl-date">Dic 2025</div>
+        <div class="stl-title">Planificación remota</div>
+        <div class="stl-body">Hugo en intercambio en México. Sesiones periódicas de brainstorming para definir alcance, tono y orientación didáctica.</div>
+        <div class="stl-tags"><span>Planificación</span><span>Visión</span></div>
       </div>
-      <div class="chal-card rv d4">
-        <img class="chal-img" src="./Imagenes/IsometricoArteModular.png" alt="Arte Modular">
-        <div class="chal-body">
-          <div class="chal-num">03</div>
-          <div class="chal-title">Arte Modular sin Seams</div>
-          <div class="chal-row chal-prob">
-            <h4>Problema</h4>
-            <p>13 piezas con UVs independientes generaban tiling visible y discontinuidades en los encuentros entre módulos adyacentes.</p>
-          </div>
-          <div class="chal-row chal-sol">
-            <h4>Solución</h4>
-            <p>Texturas 1024 px compartidas entre piezas. Vertex painting en juntas. Random Tiling en shaders de UE5.</p>
-          </div>
-          <div class="chal-row chal-res">
-            <h4>Resultado</h4>
-            <p><span class="chal-result">Cohesión</span>Visual perfecta. Reducción del 60% en materiales únicos.</p>
-          </div>
-        </div>
+
+      <div class="stl-item">
+        <div class="stl-num">03</div>
+        <div class="stl-date">Ene – Feb 2026</div>
+        <div class="stl-title">Arte modular</div>
+        <div class="stl-body">Visita física al castillo. Pipeline modular completo: Maya → Substance Painter → Unreal Engine. Repositorio GitHub colaborativo.</div>
+        <div class="stl-tags"><span>Maya</span><span>PBR</span><span>GitHub</span></div>
       </div>
+
+      <div class="stl-item">
+        <div class="stl-num">04</div>
+        <div class="stl-date">Mar – Abr 2026</div>
+        <div class="stl-title">Bootcamp · Sistemas</div>
+        <div class="stl-body">Semana intensiva en casa de Nacho. Espada C++, arco Spline, ballesta física, cañón Chaos Destruction. Los 7 sistemas en 10 días.</div>
+        <div class="stl-tags"><span>C++</span><span>Chaos</span><span>Bootcamp</span></div>
+      </div>
+
+      <div class="stl-item">
+        <div class="stl-num">05</div>
+        <div class="stl-date">Mayo 2026</div>
+        <div class="stl-title">Optimización y pulido</div>
+        <div class="stl-body">LODs manuales, lightmaps precomputados, texturas a 1024px. Integración de audio, Niagara VFX y rondas de testing con tutor y amigos.</div>
+        <div class="stl-tags"><span>Lightmaps</span><span>Testing</span></div>
+      </div>
+
+      <div class="stl-item">
+        <div class="stl-num">06</div>
+        <div class="stl-date">Finales Mayo 2026</div>
+        <div class="stl-title">Entrega y defensa</div>
+        <div class="stl-body">Memoria escrita, esta web portafolio, tráiler in-game y empaquetado Android final para la defensa del TFG en la UCV.</div>
+        <div class="stl-tags"><span>Android Build</span><span>Defensa TFG</span></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1222,9 +1171,9 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S11 — CONCLUSIONES
 ================================================================ -->
-<section id="s11" class="slide" data-i="12">
+<section id="s11" class="slide" data-i="9">
   <div class="slide-inner">
-    <div class="snum rv">13 / 14</div>
+    <div class="snum rv">10 / 11</div>
     <div class="stag rv d1">Conclusiones</div>
     <h2 class="sh rv d2">Lo aprendido. Lo que viene.</h2>
     <div class="div rv d2"></div>
@@ -1232,20 +1181,18 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
       <div class="cl-col rvl d3">
         <h3>Aprendizajes clave</h3>
         <ul class="cl-list">
-          <li><span class="bl">&#10003;</span><span>El <strong style="color:var(--th)">pipeline modular de 4 m</strong> fue la decisión más acertada: multiplicó la velocidad de construcción de niveles y mantiene coherencia visual sin esfuerzo adicional.</span></li>
+          <li><span class="bl">&#10003;</span><span>El <strong style="color:var(--th)">pipeline modular de 4 m</strong> fue la decisión más acertada: multiplicó la velocidad de construcción y mantiene coherencia visual sin esfuerzo adicional.</span></li>
           <li><span class="bl">&#10003;</span><span>La <strong style="color:var(--th)">VR requiere diseño desde cero</strong>. Portar mecánicas de pantalla plana no funciona: escala, confort y tempo deben redefinirse completamente.</span></li>
           <li><span class="bl">&#10003;</span><span><strong style="color:var(--th)">C++ es imprescindible</strong> para mecánicas complejas en UE5 VR. El sistema de espada no habría sido posible únicamente con Blueprints a 72 fps.</span></li>
-          <li><span class="bl">&#10003;</span><span>El <strong style="color:var(--th)">Game Instance como singleton de sesión</strong> resolvió elegantemente la persistencia de audioguía entre niveles sin necesidad de sistema de guardado.</span></li>
-          <li><span class="bl">&#10003;</span><span>La <strong style="color:var(--th)">estilización sobre fotorrealismo</strong> fue la elección correcta: más impacto artístico percibido con menor coste computacional en hardware standalone.</span></li>
+          <li><span class="bl">&#10003;</span><span>La <strong style="color:var(--th)">estilización sobre fotorrealismo</strong> fue la elección correcta: mayor impacto artístico percibido con menor coste computacional en hardware standalone.</span></li>
         </ul>
       </div>
       <div class="cl-col rvr d4">
         <div class="fut-panel">
           <h3>Trabajo futuro · Roadmap</h3>
           <div class="fi"><span class="fn">01</span><div class="ft"><strong>Modo Multijugador Asistido</strong><p>Un guía real del museo conectado remotamente puede aparecer en la experiencia del visitante para responder preguntas en tiempo real.</p></div></div>
-          <div class="fi"><span class="fn">02</span><div class="ft"><strong>NPC con IA Conversacional</strong><p>Integrar LLM local para que el guía NPC responda preguntas históricas del visitante con voz sintetizada en tiempo real.</p></div></div>
+          <div class="fi"><span class="fn">02</span><div class="ft"><strong>NPC con IA Conversacional</strong><p>Integrar LLM local para que el guía NPC responda preguntas históricas con voz sintetizada. Presencia del pasado en tiempo real.</p></div></div>
           <div class="fi"><span class="fn">03</span><div class="ft"><strong>Expansión del Castillo</strong><p>Torre del Homenaje, Torre de las Brujas, Sala del Trono. El arte modular permite escalar con coste drásticamente reducido.</p></div></div>
-          <div class="fi"><span class="fn">04</span><div class="ft"><strong>Modo Educativo K–12</strong><p>Quizzes históricos integrados en los objetos del museo, línea temporal interactiva, modo guiado para grupos escolares.</p></div></div>
         </div>
       </div>
     </div>
@@ -1255,7 +1202,7 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
 <!-- ================================================================
      S12 — CRÉDITOS
 ================================================================ -->
-<section id="s12" class="slide" data-i="13">
+<section id="s12" class="slide" data-i="10">
   <div class="s12-wrap">
     <div class="s12-rule rv"></div>
     <div class="stag rv d1">Fin de la presentación</div>
@@ -1275,6 +1222,50 @@ body{background:var(--bg);color:var(--tb);font-family:var(--fb);line-height:1.6;
     <a href="./index.html" class="s12-back rv d6">&#8592; Volver a la web del proyecto</a>
   </div>
 </section>
+
+<!-- ── SYSTEM DETAIL MODAL ── -->
+<div id="sys-modal">
+  <div class="smo-inner">
+    <div class="smo-head">
+      <div>
+        <div class="smo-tag" id="smo-tag"></div>
+        <h3 class="smo-title" id="smo-title"></h3>
+        <p class="smo-tech" id="smo-tech"></p>
+        <p class="smo-desc" id="smo-desc"></p>
+      </div>
+      <button class="smo-close" id="smo-close">&#215;</button>
+    </div>
+    <div class="smo-gallery">
+      <img class="smo-img" id="smo-img-a" src="" alt="">
+      <img class="smo-img" id="smo-img-b" src="" alt="" style="opacity:0">
+      <button class="smo-nav" id="smo-prev">&#8592;</button>
+      <button class="smo-nav" id="smo-next">&#8594;</button>
+    </div>
+    <div class="smo-dots" id="smo-dots"></div>
+  </div>
+</div>
+
+<!-- ── SLIDER FULLSCREEN OVERLAY ── -->
+<div id="slider-fs">
+  <button class="sfs-close" id="sfs-close">&#215;</button>
+  <div class="sfs-wrap">
+    <div class="rw-slider-wrap" id="sfs-slider" data-rw>
+      <img class="rw-slider-img" id="sfs-img-r" src="" alt="Render">
+      <img class="rw-slider-img wf" id="sfs-img-w" src="" alt="Wireframe">
+      <div class="rw-slider-line"></div>
+      <div class="rw-slider-handle"></div>
+      <span class="rw-label rw-label-r">Render</span>
+      <span class="rw-label rw-label-w">Wireframe</span>
+    </div>
+  </div>
+  <div class="sfs-hint">Arrastra el divisor · ESC para cerrar</div>
+</div>
+
+<!-- ── ZOOM OVERLAY (props showcase) ── -->
+<div id="zoom-overlay" style="position:fixed;inset:0;z-index:7100;background:rgba(12,11,10,.97);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:center;justify-content:center;cursor:zoom-out">
+  <img id="zoom-img" src="" alt="" style="max-width:92vw;max-height:90vh;object-fit:contain;border-radius:var(--radl)">
+  <button style="position:absolute;top:16px;right:16px;background:none;border:1px solid var(--r2);border-radius:4px;color:var(--tm);cursor:pointer;width:34px;height:34px;font-size:17px;display:flex;align-items:center;justify-content:center;transition:all .26s ease" id="zoom-close">&#215;</button>
+</div>
 
 <script type="module">
 import * as THREE from 'three';
@@ -1299,7 +1290,7 @@ function goTo(idx) {
     cur = idx;
     updateUI(idx);
     triggerReveals(slides[idx]);
-    if (idx === 8) initModels();
+    if (idx === 7) initModels();
     overlay.classList.remove('show');
     setTimeout(() => { busy = false; }, 320);
   }, 280);
@@ -1354,15 +1345,13 @@ function countUp(el, target) {
   })(start);
 }
 
-/* ── ACCORDION ── */
-document.querySelectorAll('.acc-hd').forEach(h => {
-  h.addEventListener('click', () => {
-    const item = h.parentElement, was = item.classList.contains('open');
-    h.closest('.acc-grid').querySelectorAll('.acc-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.acc-hd').setAttribute('aria-expanded', 'false');
-    });
-    if (!was) { item.classList.add('open'); h.setAttribute('aria-expanded', 'true'); }
+/* ── BC ACCORDION (VR theory) ── */
+document.querySelectorAll('.bc-item .bc-title').forEach(t => {
+  t.addEventListener('click', () => {
+    const item = t.parentElement;
+    const wasOpen = item.classList.contains('bc-open');
+    t.closest('.bc-acc').querySelectorAll('.bc-item').forEach(i => i.classList.remove('bc-open'));
+    if (!wasOpen) item.classList.add('bc-open');
   });
 });
 
@@ -1388,8 +1377,9 @@ function openLbox(lvlIdx) {
   document.getElementById('lb-detail').textContent= l.detail;
   lbImg$.src = l.images[0];
   lbDots.innerHTML = l.images.map((_, i) => `<button class="lbox-dot${i===0?' on':''}" data-li="${i}"></button>`).join('');
-  lbDots.querySelectorAll('.lbox-dot').forEach(d => d.addEventListener('click', () => setLbImg(+d.dataset.li)));
+  lbDots.querySelectorAll('.lbox-dot').forEach(d => d.addEventListener('click', () => { stopLbAuto(); setLbImg(+d.dataset.li); startLbAuto(); }));
   lbox.classList.add('open');
+  startLbAuto();
 }
 function setLbImg(i) {
   lbImg = i;
@@ -1397,14 +1387,17 @@ function setLbImg(i) {
   lbDots.querySelectorAll('.lbox-dot').forEach((d, j) => d.classList.toggle('on', j === i));
 }
 document.querySelectorAll('.lvc').forEach((c, i) => c.addEventListener('click', () => openLbox(i)));
-document.getElementById('lb-close').addEventListener('click', () => lbox.classList.remove('open'));
-document.getElementById('lb-prev').addEventListener('click', () => { const imgs = LEVELS[lbIdx].images; setLbImg((lbImg - 1 + imgs.length) % imgs.length); });
-document.getElementById('lb-next').addEventListener('click', () => { const imgs = LEVELS[lbIdx].images; setLbImg((lbImg + 1) % imgs.length); });
+document.getElementById('lb-close').addEventListener('click', () => { stopLbAuto(); lbox.classList.remove('open'); });
+document.getElementById('lb-prev').addEventListener('click', () => { stopLbAuto(); const imgs = LEVELS[lbIdx].images; setLbImg((lbImg - 1 + imgs.length) % imgs.length); startLbAuto(); });
+document.getElementById('lb-next').addEventListener('click', () => { stopLbAuto(); const imgs = LEVELS[lbIdx].images; setLbImg((lbImg + 1) % imgs.length); startLbAuto(); });
 document.addEventListener('keydown', e => {
+  if (sysModal.classList.contains('open')) { if (e.key === 'Escape') closeSysModal(); return; }
+  if (sliderFS.classList.contains('open')) { if (e.key === 'Escape') closeSliderFS(); return; }
+  if (zoomOv.style.opacity === '1')        { if (e.key === 'Escape') closeZoom(); return; }
   if (!lbox.classList.contains('open')) return;
-  if (e.key === 'ArrowLeft')  { const imgs = LEVELS[lbIdx].images; setLbImg((lbImg - 1 + imgs.length) % imgs.length); }
-  if (e.key === 'ArrowRight') { const imgs = LEVELS[lbIdx].images; setLbImg((lbImg + 1) % imgs.length); }
-  if (e.key === 'Escape')     lbox.classList.remove('open');
+  if (e.key === 'ArrowLeft')  { stopLbAuto(); const imgs = LEVELS[lbIdx].images; setLbImg((lbImg - 1 + imgs.length) % imgs.length); startLbAuto(); }
+  if (e.key === 'ArrowRight') { stopLbAuto(); const imgs = LEVELS[lbIdx].images; setLbImg((lbImg + 1) % imgs.length); startLbAuto(); }
+  if (e.key === 'Escape')     { stopLbAuto(); lbox.classList.remove('open'); }
 });
 
 /* ── THREE.JS MODEL VIEWERS ── */
@@ -1532,9 +1525,114 @@ function initModels() {
   });
 })();
 
+/* ── SYSTEM DETAIL MODAL ── */
+const SYSTEMS = {
+  1: { tag:'Blueprint', title:'Arco', tech:'SplineComponent · AudioComponent · ProjectileMovement', desc:'La cuerda es un SplineComponent que se deforma en tiempo real según la posición del controlador. Pitch variable: a mayor tensión, tono más agudo. La fuerza de disparo se calcula del delta de estiramiento y se aplica como impulso al proyectil.', images:['./Imagenes/TutorialArco.png','./Imagenes/CampoEntrenamiento2.png'] },
+  2: { tag:'Blueprint', title:'Ballesta', tech:'VR Gun Template · ProjectileMovementComponent · LineTrace', desc:'Perno con trayectoria parabólica (ProjectileMovementComponent). Recarga háptica: el jugador tira de la cuerda manualmente. LineTrace detecta impacto con feedback visual y sonoro en el punto de colisión.', images:['./Imagenes/TutorialBallesta.png','./Imagenes/Ballesta4k.png'] },
+  3: { tag:'C++', title:'Espada', tech:'ASwordActor · AProceduralCuttableActor · SliceProceduralMesh', desc:'ASwordActor (C++) registra SweepTrace en cada tick. Si detecta colisión con AProceduralCuttableActor, invoca SliceProceduralMesh con el plano de la trayectoria. Fragmentos con física independiente, timer de destrucción a 4s, máx. 3 cortes simultáneos.', images:['./Imagenes/TutorialEspada.jpg','./Imagenes/CampoEntrenamiento3.png'] },
+  4: { tag:'Blueprint', title:'Cañón', tech:'5 Blueprints · Chaos Destruction · 7 Fases de activación', desc:'7 fases coordinadas: carga de pólvora, inserción del proyectil, apuntado, encendido de mecha, disparo con cámara lenta, impacto con Chaos Destruction (fragmentos físicos independientes) y reset del estado completo.', images:['./Imagenes/Tutorial Canon.jpg','./Imagenes/TorreDestruccion.png','./Imagenes/CampoEntrenamiento4.png'] },
+  5: { tag:'Blueprint', title:'Objetos Museo', tech:'BP Inheritance · Emissive Material · Widget 3D', desc:'BP_MuseoObjectBase define la interfaz de pickup e info display. Cada objeto hereda y sobrescribe sus datos históricos. Al acercarse el jugador se activa emissive glow en el material y aparece un Widget 3D flotante con información contextual del artefacto.', images:['./Imagenes/MuseoInterior2.png','./Imagenes/MuseoInterior5.png','./Imagenes/RetratoFelipe.png'] },
+  6: { tag:'Blueprint', title:'Audioguía', tech:'Game Instance · Set<Name> · BoxTrigger · UAudioComponent', desc:'Game Instance mantiene un Set<Name> de audios ya reproducidos. Al entrar en un BoxTrigger, consulta si el ID fue reproducido: si no, narra y añade al Set. Persiste entre cambios de nivel sin Game Save.', images:['./Imagenes/PersonajeGuia.png','./Imagenes/NivelSubterraneoInicio.png'] },
+  7: { tag:'Blueprint', title:'Teletransporte', tech:'Camera Fade · Widget 3D · Find Look At Rotation · VRPawn', desc:'Diseñado para minimizar VR sickness. CameraFade negro in/out, VRPawn teleporta a destino, Find Look At Rotation orienta automáticamente al jugador hacia el punto de interés. Widget 3D en destino muestra preview del área antes de confirmar.', images:['./Imagenes/IsometricoTP.png','./Imagenes/MuseoInterior4.png'] }
+};
+
+const sysModal = document.getElementById('sys-modal');
+const smoImgA  = document.getElementById('smo-img-a');
+const smoImgB  = document.getElementById('smo-img-b');
+const smoDots  = document.getElementById('smo-dots');
+let smoData = null, smoIdx = 0, smoTimer = null;
+
+function openSysModal(id) {
+  const d = SYSTEMS[id];
+  if (!d) return;
+  smoData = d; smoIdx = 0;
+  document.getElementById('smo-tag').textContent   = d.tag;
+  document.getElementById('smo-title').textContent = d.title;
+  document.getElementById('smo-tech').textContent  = d.tech;
+  document.getElementById('smo-desc').textContent  = d.desc;
+  smoImgA.src = d.images[0]; smoImgA.style.opacity = '1';
+  smoImgB.src = ''; smoImgB.style.opacity = '0';
+  renderSmoDots();
+  sysModal.classList.add('open');
+  startSmoTimer();
+}
+function closeSysModal() {
+  sysModal.classList.remove('open');
+  clearInterval(smoTimer);
+}
+function renderSmoDots() {
+  if (!smoData) return;
+  smoDots.innerHTML = smoData.images.map((_, i) => `<button class="smo-dot${i===smoIdx?' on':''}" data-si="${i}"></button>`).join('');
+  smoDots.querySelectorAll('.smo-dot').forEach(d => d.addEventListener('click', () => { clearInterval(smoTimer); goSmoImg(+d.dataset.si); startSmoTimer(); }));
+}
+function goSmoImg(idx) {
+  if (!smoData || smoData.images.length < 2) return;
+  const next = smoData.images[idx];
+  const [active, hidden] = smoImgA.style.opacity === '1' ? [smoImgA, smoImgB] : [smoImgB, smoImgA];
+  hidden.src = next; hidden.style.opacity = '1'; active.style.opacity = '0';
+  smoIdx = idx; renderSmoDots();
+}
+function startSmoTimer() {
+  clearInterval(smoTimer);
+  if (!smoData || smoData.images.length < 2) return;
+  smoTimer = setInterval(() => { goSmoImg((smoIdx + 1) % smoData.images.length); }, 2200);
+}
+document.querySelectorAll('.sysc[data-sys]').forEach(c => c.addEventListener('click', () => openSysModal(+c.dataset.sys)));
+document.getElementById('smo-close').addEventListener('click', closeSysModal);
+sysModal.addEventListener('click', e => { if (e.target === sysModal) closeSysModal(); });
+document.getElementById('smo-prev').addEventListener('click', () => { clearInterval(smoTimer); goSmoImg((smoIdx - 1 + smoData.images.length) % smoData.images.length); startSmoTimer(); });
+document.getElementById('smo-next').addEventListener('click', () => { clearInterval(smoTimer); goSmoImg((smoIdx + 1) % smoData.images.length); startSmoTimer(); });
+
+/* ── LIGHTBOX AUTO-ADVANCE ── */
+let lbAutoTimer = null;
+function startLbAuto() {
+  clearInterval(lbAutoTimer);
+  lbAutoTimer = setInterval(() => {
+    const imgs = LEVELS[lbIdx].images;
+    setLbImg((lbImg + 1) % imgs.length);
+  }, 2500);
+}
+function stopLbAuto() { clearInterval(lbAutoTimer); }
+
+/* ── ZOOM OVERLAY (props showcase) ── */
+const zoomOv    = document.getElementById('zoom-overlay');
+const zoomImg   = document.getElementById('zoom-img');
+document.querySelectorAll('[data-zoom]').forEach(el => {
+  el.addEventListener('click', () => {
+    zoomImg.src = el.dataset.zoom;
+    zoomOv.style.opacity = '1'; zoomOv.style.pointerEvents = 'all';
+  });
+});
+function closeZoom() { zoomOv.style.opacity = '0'; zoomOv.style.pointerEvents = 'none'; }
+document.getElementById('zoom-close').addEventListener('click', closeZoom);
+zoomOv.addEventListener('click', e => { if (e.target === zoomOv) closeZoom(); });
+
+/* ── SLIDER FULLSCREEN ── */
+const sliderFS   = document.getElementById('slider-fs');
+const sfsSlider  = document.getElementById('sfs-slider');
+const sfsImgR    = document.getElementById('sfs-img-r');
+const sfsImgW    = document.getElementById('sfs-img-w');
+let sfsSliderInited = false;
+
+function openSliderFS(imgR, imgW) {
+  sfsImgR.src = imgR; sfsImgW.src = imgW;
+  sliderFS.classList.add('open');
+  if (!sfsSliderInited) { initSingleSlider(sfsSlider); sfsSliderInited = true; }
+  else { /* reset to 50% */ const line = sfsSlider.querySelector('.rw-slider-line'), handle = sfsSlider.querySelector('.rw-slider-handle'); const wf = sfsSlider.querySelector('.rw-slider-img.wf'); wf.style.clipPath='inset(0 50% 0 0)'; line.style.left='50%'; handle.style.left='50%'; }
+}
+function closeSliderFS() { sliderFS.classList.remove('open'); }
+document.getElementById('sfs-close').addEventListener('click', closeSliderFS);
+sliderFS.addEventListener('click', e => { if (e.target === sliderFS) closeSliderFS(); });
+
+document.querySelectorAll('[data-rw-fs]').forEach(wrap => {
+  wrap.addEventListener('click', e => {
+    if (Math.abs(e.movementX || 0) > 3) return; // was dragging
+    openSliderFS(wrap.dataset.imgR, wrap.dataset.imgW);
+  });
+});
+
 /* ── RENDER / WIREFRAME SLIDER ── */
-(function() {
-  function initSlider(wrap) {
+function initSingleSlider(wrap) {
     const wfImg  = wrap.querySelector('.rw-slider-img.wf');
     const line   = wrap.querySelector('.rw-slider-line');
     const handle = wrap.querySelector('.rw-slider-handle');
@@ -1565,8 +1663,9 @@ function initModels() {
     window.addEventListener('touchend',  () => { dragging = false; });
   }
 
-  document.querySelectorAll('[data-rw]').forEach(initSlider);
-})();
+document.querySelectorAll('[data-rw]').forEach(wrap => {
+  if (!wrap.dataset.fsInited) initSingleSlider(wrap);
+});
 </script>
 
 </body>
