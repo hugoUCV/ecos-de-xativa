@@ -221,6 +221,9 @@ def section_header(title, subtitle=None, color=GOLD):
 def build_content():
     story = []
 
+    # Page 1 is the cover (drawn by onFirstPage callback) — push content to page 2
+    story.append(PageBreak())
+
     # ── SECCIÓN 1: GUION ─────────────────────────────────────────────────
     story += section_header("GUION POR DIAPOSITIVA",
                              "Tiempo total objetivo: 14–15 min · Con margen para transiciones")
